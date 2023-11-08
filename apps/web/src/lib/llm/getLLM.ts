@@ -1,12 +1,10 @@
 import { ChatOpenAI } from "langchain/chat_models/openai";
 import type { Callbacks } from "langchain/callbacks";
-import { ChatAnthropic } from "langchain/chat_models/anthropic";
 import { ChatOllama } from "langchain/chat_models/ollama";
 import { appStateStore } from "$lib/stores/appStateStore";
 import { default_openai_fields } from "config-helpers/default-llm-configs/default_openai_fields";
 import { default_azure_fields } from "config-helpers/default-llm-configs/default_azure_fields";
 import { default_ollama_fields } from "config-helpers/default-llm-configs/default_ollama_fields";
-import { default_anthropic_fields } from "config-helpers/default-llm-configs/default_anthropic_fields";
 import type { BaseLanguageModel } from "langchain/base_language";
 import { LLMIntegrationTypeName, type IdbLLMConfig } from "../idb-models/IdbLLMConfig";
 
@@ -18,9 +16,6 @@ export const testLLM = async (idbLLMConfig: IdbLLMConfig) => {
             maxRetries: 1,
             verbose: true,
         };
-        if (idbLLMConfig.type === LLMIntegrationTypeName.ChatAnthropic) {
-            options.timeout = 20e3;
-        }
         const result = await llm.invoke('hello', options);
         return {
             status: true,
@@ -79,43 +74,6 @@ export const getLLM = (idbLLMConfig: IdbLLMConfig, callbacks?: Callbacks): BaseL
         return new ChatOllama({
             ...configObj,
             callbacks,
-        });
-    } else if (
-        idbLLMConfig.type === LLMIntegrationTypeName.ChatAnthropic
-    ) {
-        const configObj: typeof default_anthropic_fields = idbLLMConfig.config;
-        if (
-            Object.keys(configObj.overrideRequestBody).length > 0 ||
-            Object.keys(configObj.overrideRequestHeaders).length > 0
-        ) {
-            if (!configObj.clientOptions) {
-                configObj.clientOptions = {};
-            }
-            configObj.clientOptions.fetch = function (input: RequestInfo | URL, init?: RequestInit) {
-                let options = { ...init };
-                if (Object.keys(configObj.overrideRequestHeaders).length > 0) {
-                    options.headers = {
-                        ...options?.headers,
-                        ...configObj.overrideRequestHeaders,
-                    };
-                }
-                if (Object.keys(configObj.overrideRequestBody).length > 0) {
-                    options.body = JSON.stringify({
-                        ...JSON.parse(options.body as string),
-                        ...configObj.overrideRequestBody,
-                    });
-                }
-                return fetch(input, options);
-            }
-        }
-
-        if (configObj.anthropicApiKey?.trim() === "") {
-            delete configObj.anthropicApiKey;
-        }
-        return new ChatAnthropic({
-            anthropicApiKey: appStateStore.anthropicApiKey,
-            ...configObj,
-            callbacks
         });
     } else if (
         idbLLMConfig.type === LLMIntegrationTypeName.ChatOpenAIAzure

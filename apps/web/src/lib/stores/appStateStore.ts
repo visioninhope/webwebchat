@@ -27,9 +27,6 @@ export class AppStateModel
 
     azureOpenAIApiDeploymentName: string = "";
 
-    // ============ Anthropic ============
-    anthropicApiKey: string = "";
-
 
     async loadState() {
         try {

@@ -1,6 +1,5 @@
 <script lang="ts">
 	import SettingsTabs from "$lib/components/SettingsTabs.svelte";
-	import GlobalAnthropic from "./global/GlobalAnthropic.svelte";
 	import GlobalAzure from "./global/GlobalAzure.svelte";
 	import GlobalOai from "./global/GlobalOai.svelte";
 	import GlobalTheme from "./global/GlobalTheme.svelte";
@@ -34,9 +33,6 @@
 
 <div class="space-y-20">
 	<GlobalOai />
-	<div class="divider" />
-
-	<GlobalAnthropic />
 	<div class="divider" />
 
 	<GlobalAzure />

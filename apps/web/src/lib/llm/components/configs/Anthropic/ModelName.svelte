@@ -1,4 +1,4 @@
-<script lang="ts">
+<!-- <script lang="ts">
 	export let modelName = "claude-2";
 	let customModel = false;
 	const modelOptions = ["claude-2", "claude-instant-v1"];
@@ -61,4 +61,4 @@
 			</div>
 		</details>
 	{/if}
-</div>
+</div> -->

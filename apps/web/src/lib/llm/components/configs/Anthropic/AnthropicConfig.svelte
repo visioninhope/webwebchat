@@ -1,4 +1,4 @@
-<script lang="ts">
+<!-- <script lang="ts">
 	import PasswordInputWrapper from "ui/components/PasswordInputWrapper.svelte";
 	import { BASE_NAV } from "$lib/constants/BASE_NAV";
 	import { defaultSystemMessage } from "$lib/constants/constants";
@@ -246,4 +246,4 @@
 			<PasswordInputWrapper bind:value={idbLLMConfig.config.anthropicApiKey} />
 		</div>
 	</details>
-</div>
+</div> -->

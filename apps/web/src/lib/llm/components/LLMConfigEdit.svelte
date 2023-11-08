@@ -6,10 +6,8 @@
 	import { default_openai_fields } from "config-helpers/default-llm-configs/default_openai_fields";
 	import { default_azure_fields } from "config-helpers/default-llm-configs/default_azure_fields";
 	import { default_ollama_fields } from "config-helpers/default-llm-configs/default_ollama_fields";
-	import { default_anthropic_fields } from "config-helpers/default-llm-configs/default_anthropic_fields";
 	import AzureConfig from "./configs/Azure/AzureConfig.svelte";
 	import OllamaConfig from "./configs/Ollama/OllamaConfig.svelte";
-	import AnthropicConfig from "./configs/Anthropic/AnthropicConfig.svelte";
 	import { testLLM } from "$lib/llm/getLLM";
 	import LogoType from "./logos/LogoType.svelte";
 	import {
@@ -44,7 +42,7 @@
 		} else if (idbLLMConfig.type === LLMIntegrationTypeName.ChatOllama) {
 			idbLLMConfig.config = default_ollama_fields;
 		} else if (idbLLMConfig.type === LLMIntegrationTypeName.ChatAnthropic) {
-			idbLLMConfig.config = default_anthropic_fields;
+			// do nothing
 		} else {
 			throw new Error(`Unknown chat provider type: ${idbLLMConfig.type}`);
 		}
@@ -125,13 +123,6 @@
 			>
 				ChatOllama
 			</a>
-		{:else if idbLLMConfig.type === LLMIntegrationTypeName.ChatAnthropic}
-			<a
-				href="https://js.langchain.com/docs/api/chat_models_anthropic/classes/ChatAnthropic#constructors"
-				target="_blank"
-			>
-				ChatAnthropic
-			</a>
 		{:else if idbLLMConfig.type === LLMIntegrationTypeName.ChatOpenAIAzure}
 			<a
 				href="https://js.langchain.com/docs/api/chat_models_openai/classes/ChatOpenAI#constructors"
@@ -146,56 +137,64 @@
 		{:else if idbLLMConfig.type === LLMIntegrationTypeName.ChatOllama}
 			<OllamaConfig bind:idbLLMConfig />
 		{:else if idbLLMConfig.type === LLMIntegrationTypeName.ChatAnthropic}
-			<AnthropicConfig bind:idbLLMConfig />
+			Anthropic API does not allow requests from other websites.
+			<br />
+			Because of this reason, it is supported with extension only.
+			<br />
+			(Browser limitation: 'CORS')
 		{:else if idbLLMConfig.type === LLMIntegrationTypeName.ChatOpenAIAzure}
 			<AzureConfig bind:idbLLMConfig />
 		{/if}
 	{/if}
 
-	<div class="divider mt-20" />
+	{#if idbLLMConfig.type === LLMIntegrationTypeName.ChatAnthropic}
+		<!-- hide -->
+	{:else}
+		<div class="divider mt-20" />
 
-	<div class="form-control mb-10">
-		<span class="label">
-			<span class="label-text">Name (optional)</span>
-		</span>
-		<input
-			bind:value={idbLLMConfig.name}
-			type="text"
-			class="input input-bordered"
-		/>
-	</div>
-
-	<div class="divider" />
-	<label class="label cursor-pointer max-w-sm">
-		<input type="checkbox" class="toggle" bind:checked={makeDefaultModel} />
-		<span class="label-text">Remember settings for all future chats</span>
-	</label>
-	<div class="divider" />
-	<div class="grid grid-cols-2 gap-4 mb-5">
-		<div>
-			<button
-				class="btn btn-outline"
-				on:click={testBtnClick}
-				disabled={isTesting}
-			>
-				{#if isTesting}
-					<span class="loading loading-spinner" />
-				{/if}
-				Test
-			</button>
-			{#if testResult}
-				{#if testResult.status}
-					<div class="alert alert-success inline">
-						<span>Success</span>
-					</div>
-				{:else}
-					<div class="alert alert-error inline">
-						<span>Error: {testResult.error}</span>
-					</div>
-				{/if}
-			{/if}
+		<div class="form-control mb-10">
+			<span class="label">
+				<span class="label-text">Name (optional)</span>
+			</span>
+			<input
+				bind:value={idbLLMConfig.name}
+				type="text"
+				class="input input-bordered"
+			/>
 		</div>
-	</div>
-	<div class="divider" />
-	<button class="btn btn-primary btn-block" on:click={onSave}>Save</button>
+
+		<div class="divider" />
+		<label class="label cursor-pointer max-w-sm">
+			<input type="checkbox" class="toggle" bind:checked={makeDefaultModel} />
+			<span class="label-text">Remember settings for all future chats</span>
+		</label>
+		<div class="divider" />
+		<div class="grid grid-cols-2 gap-4 mb-5">
+			<div>
+				<button
+					class="btn btn-outline"
+					on:click={testBtnClick}
+					disabled={isTesting}
+				>
+					{#if isTesting}
+						<span class="loading loading-spinner" />
+					{/if}
+					Test
+				</button>
+				{#if testResult}
+					{#if testResult.status}
+						<div class="alert alert-success inline">
+							<span>Success</span>
+						</div>
+					{:else}
+						<div class="alert alert-error inline">
+							<span>Error: {testResult.error}</span>
+						</div>
+					{/if}
+				{/if}
+			</div>
+		</div>
+		<div class="divider" />
+		<button class="btn btn-primary btn-block" on:click={onSave}>Save</button>
+	{/if}
 {/if}
