@@ -1,13 +1,10 @@
-import type { AzureOpenAIInput, OpenAIChatInput } from "langchain/chat_models/openai";
-import type { BaseLanguageModelParams } from "langchain/dist/base_language";
-import type { LegacyOpenAIInput } from "langchain/dist/types/openai-types";
-import type { ClientOptions } from "openai";
+import type { ChatOpenAI } from 'langchain/chat_models/openai';
 
+type ChatOpenAIFields = ConstructorParameters<typeof ChatOpenAI>[0];
 // https://platform.openai.com/docs/api-reference/chat/create
-export const default_openai_fields: Partial<OpenAIChatInput> & Partial<AzureOpenAIInput> & BaseLanguageModelParams & {
-    configuration?: ClientOptions & LegacyOpenAIInput;
-    overrideRequestHeaders: any,
-    overrideRequestBody: any,
+export const default_openai_fields: ChatOpenAIFields & {
+	overrideRequestHeaders: any;
+	overrideRequestBody: any;
 } = {
     openAIApiKey: "",
     // enum | string for fine-tuning like : 'ft:gpt-3.5-turbo-0613:{ORG_NAME}::{MODEL_ID}'

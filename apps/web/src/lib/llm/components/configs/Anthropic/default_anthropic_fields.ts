@@ -1,10 +1,10 @@
-import type { AnthropicInput } from "langchain/chat_models/anthropic";
-import type { BaseChatModelParams } from "langchain/chat_models/base";
+import { ChatAnthropic } from 'langchain/chat_models/anthropic';
+type ChatAnthropicFields = ConstructorParameters<typeof ChatAnthropic>[0];
 
-export const default_anthropic_fields: Partial<AnthropicInput> & BaseChatModelParams & {
-    // clientOptions?: ClientOptions;
-    overrideRequestHeaders: any,
-    overrideRequestBody: any,
+export const default_anthropic_fields: ChatAnthropicFields & {
+	// clientOptions?: ClientOptions;
+	overrideRequestHeaders: any;
+	overrideRequestBody: any;
 } = {
     /** Anthropic API key */
     anthropicApiKey: "",

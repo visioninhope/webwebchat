@@ -7,7 +7,7 @@ import type { default_openai_fields } from "./components/configs/OpenAI/default_
 import type { default_ollama_fields } from "./components/configs/Ollama/default_ollama_fields";
 import type { default_azure_fields } from "./components/configs/Azure/default_azure_fields";
 import type { default_anthropic_fields } from "./components/configs/Anthropic/default_anthropic_fields";
-import type { BaseLanguageModel } from "langchain/dist/base_language";
+import type { BaseLanguageModel } from "langchain/base_language";
 import { LLMIntegrationTypeName, type IdbLLMConfig } from "../idb-models/IdbLLMConfig";
 
 export const testLLM = async (idbLLMConfig: IdbLLMConfig) => {

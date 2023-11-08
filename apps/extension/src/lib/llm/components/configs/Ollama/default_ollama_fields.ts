@@ -2,13 +2,14 @@
 // ollama run llama2
 // OLLAMA_ORIGINS=https://www.webwebchat.com OLLAMA_HOST=127.0.0.1:11435 ollama serve
 
-import type { OllamaInput } from "langchain/dist/util/ollama";
+import { ChatOllama } from 'langchain/chat_models/ollama';
 
 // OLLAMA_ORIGINS=http://localhost:4000 OLLAMA_HOST=127.0.0.1:11434 ollama serve
 // model = "llama2";
 // baseUrl = "http://localhost:11434";
+type OllamaFields = ConstructorParameters<typeof ChatOllama>[0];
 
-export const default_ollama_fields: OllamaInput = {
+export const default_ollama_fields: OllamaFields = {
     model: "llama2",
     baseUrl: "http://localhost:11434",
     embeddingOnly: undefined,
