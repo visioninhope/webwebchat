@@ -1,5 +1,5 @@
 import type { ChatOpenAI } from 'langchain/chat_models/openai';
-import { default_openai_fields } from '../OpenAI/default_openai_fields';
+import { default_openai_fields } from './default_openai_fields';
 
 type ChatOpenAIFields = ConstructorParameters<typeof ChatOpenAI>[0];
 

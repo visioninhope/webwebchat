@@ -3,10 +3,10 @@ import type { Callbacks } from "langchain/callbacks";
 import { ChatAnthropic } from "langchain/chat_models/anthropic";
 import { ChatOllama } from "langchain/chat_models/ollama";
 import { appStateStore } from "$lib/stores/appStateStore";
-import type { default_openai_fields } from "./components/configs/OpenAI/default_openai_fields";
-import type { default_ollama_fields } from "./components/configs/Ollama/default_ollama_fields";
-import type { default_azure_fields } from "./components/configs/Azure/default_azure_fields";
-import type { default_anthropic_fields } from "./components/configs/Anthropic/default_anthropic_fields";
+import { default_openai_fields } from "config-helpers/default-llm-configs/default_openai_fields";
+import { default_azure_fields } from "config-helpers/default-llm-configs/default_azure_fields";
+import { default_ollama_fields } from "config-helpers/default-llm-configs/default_ollama_fields";
+import { default_anthropic_fields } from "config-helpers/default-llm-configs/default_anthropic_fields";
 import type { BaseLanguageModel } from "langchain/base_language";
 import { LLMIntegrationTypeName, type IdbLLMConfig } from "../idb-models/IdbLLMConfig";
 

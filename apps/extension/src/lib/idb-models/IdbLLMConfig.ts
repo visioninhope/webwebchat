@@ -1,7 +1,7 @@
 import { generateRandomId } from "$lib/utils/generateRandomString";
 import { openDB, type DBSchema } from 'idb';
 import { deleteModelFromList, upsertChatModel } from "$lib/stores/LLMConfigList";
-import { default_openai_fields } from "$lib/llm/components/configs/OpenAI/default_openai_fields";
+import { default_openai_fields } from "config-helpers/default-llm-configs/default_openai_fields";
 import { safeStringify } from "$lib/utils/safeStringify";
 import { defaultSystemMessage } from "$lib/constants/constants";
 

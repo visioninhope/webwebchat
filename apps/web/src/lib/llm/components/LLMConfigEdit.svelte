@@ -3,13 +3,13 @@
 	import BasicJsonEditor from "./configs/BasicJsonEditor.svelte";
 	import OAIConfig from "./configs/OpenAI/OpenAIConfig.svelte";
 	import { defaultSystemMessage } from "$lib/constants/constants";
-	import { default_openai_fields } from "./configs/OpenAI/default_openai_fields";
-	import { default_azure_fields } from "./configs/Azure/default_azure_fields";
-	import { default_ollama_fields } from "./configs/Ollama/default_ollama_fields";
+	import { default_openai_fields } from "config-helpers/default-llm-configs/default_openai_fields";
+	import { default_azure_fields } from "config-helpers/default-llm-configs/default_azure_fields";
+	import { default_ollama_fields } from "config-helpers/default-llm-configs/default_ollama_fields";
+	import { default_anthropic_fields } from "config-helpers/default-llm-configs/default_anthropic_fields";
 	import AzureConfig from "./configs/Azure/AzureConfig.svelte";
 	import OllamaConfig from "./configs/Ollama/OllamaConfig.svelte";
 	import AnthropicConfig from "./configs/Anthropic/AnthropicConfig.svelte";
-	import { default_anthropic_fields } from "./configs/Anthropic/default_anthropic_fields";
 	import { testLLM } from "$lib/llm/getLLM";
 	import LogoType from "./logos/LogoType.svelte";
 	import {
