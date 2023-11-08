@@ -27,6 +27,7 @@
 		"svelte-spa-router": "^3.3.0",
 		"tailwind-config": "workspace:*",
 		"config-helpers": "workspace:*",
+		"shared-types": "workspace:*",
 		"tailwindcss": "^3.3.3",
 		"tslib": "2.6.2",
 		"typescript": "5.2.2",

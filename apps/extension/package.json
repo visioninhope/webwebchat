@@ -26,6 +26,7 @@
 		"idb": "^7.1.1",
 		"idb-keyval": "^6.2.1",
 		"config-helpers": "workspace:*",
+		"shared-types": "workspace:*",
 		"langchain": "^0.0.183",
 		"postcss": "^8.4.28",
 		"svelte": "4.2.0",

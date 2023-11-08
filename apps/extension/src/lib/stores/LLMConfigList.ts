@@ -1,11 +1,11 @@
 import { StoreClass } from "$lib/utils/StoreClass";
-import type { LLMIntegrationTypeName } from "$lib/idb-models/IdbLLMConfig";
+import { LLMTypeEnum } from "shared-types/LLMTypeEnum";
 import { IdbLLMConfig, NEW_LLM_CONFIG_ID } from "$lib/idb-models/IdbLLMConfig";
 
 export type ChatModelListType = {
     llmConfigId: string;
     name: string;
-    type: LLMIntegrationTypeName,
+    type: LLMTypeEnum,
     model: string;
 }
 
@@ -37,7 +37,7 @@ export const waitUntil_llmConfigListReady = async () => {
     }
 }
 
-export const upsertChatModel = (name: string, llmConfigId: string, type: LLMIntegrationTypeName, model: string) => {
+export const upsertChatModel = (name: string, llmConfigId: string, type: LLMTypeEnum, model: string) => {
     const index = llmConfigList.list.findIndex((model) => model.llmConfigId === llmConfigId);
     if (index !== -1) {
         llmConfigList.list[index] = { llmConfigId: llmConfigId, name, type, model };

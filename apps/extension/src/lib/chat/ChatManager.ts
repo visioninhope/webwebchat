@@ -6,7 +6,8 @@ import { BufferMemory } from "langchain/memory";
 import { ChatPromptTemplate, HumanMessagePromptTemplate, MessagesPlaceholder, SystemMessagePromptTemplate } from "langchain/prompts";
 import { ConversationChain } from "langchain/chains";
 import { IdbChatOptions } from "$lib/idb-models/IdbChatOptions";
-import { IdbLLMConfig, LLMIntegrationTypeName } from "$lib/idb-models/IdbLLMConfig";
+import { IdbLLMConfig } from "$lib/idb-models/IdbLLMConfig";
+import { LLMTypeEnum } from "shared-types/LLMTypeEnum";
 
 export class ChatManager {
 
@@ -101,12 +102,15 @@ TITLE:
 
     async getLLMandConfig(callbacks?: Callbacks) {
         const llmConfig = await IdbLLMConfig.withLoad(this.chatOptions.llmConfigId);
-        if (llmConfig.type === LLMIntegrationTypeName.ChatAnthropic) {
-            llmConfig.config.overrideRequestHeaders = {
-                "revproxyhost": "api.anthropic.com"
-            }
-            llmConfig.config.anthropicApiUrl = import.meta.env.DEV ? "http://localhost:3348" : "https://proxy.webwebchat.com";
-        }
+
+        // proxy not required for extension
+        // if (llmConfig.type === LLMTypeEnum.ChatAnthropic) {
+        //     llmConfig.config.overrideRequestHeaders = {
+        //         "revproxyhost": "api.anthropic.com"
+        //     }
+        //     llmConfig.config.anthropicApiUrl = import.meta.env.DEV ? "http://localhost:3348" : "https://proxy.webwebchat.com";
+        // }
+
         const llm = getLLM(llmConfig, callbacks);
         return { llm, llmConfig };
     }

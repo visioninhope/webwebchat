@@ -6,7 +6,8 @@ import { BufferMemory } from "langchain/memory";
 import { ChatPromptTemplate, HumanMessagePromptTemplate, MessagesPlaceholder, SystemMessagePromptTemplate } from "langchain/prompts";
 import { ConversationChain } from "langchain/chains";
 import { IdbChatOptions } from "$lib/idb-models/IdbChatOptions";
-import { IdbLLMConfig, LLMIntegrationTypeName } from "$lib/idb-models/IdbLLMConfig";
+import { IdbLLMConfig } from "$lib/idb-models/IdbLLMConfig";
+import { LLMTypeEnum } from "shared-types/LLMTypeEnum";
 
 export class ChatManager {
 
@@ -103,7 +104,7 @@ TITLE:
         const llmConfig = await IdbLLMConfig.withLoad(this.chatOptions.llmConfigId);
 
         // Anthropic removed from SPA, I do not want to add a proxy server for now.
-        // if (llmConfig.type === LLMIntegrationTypeName.ChatAnthropic) {
+        // if (llmConfig.type === LLMTypeEnum.ChatAnthropic) {
         //     llmConfig.config.overrideRequestHeaders = {
         //         "revproxyhost": "api.anthropic.com"
         //     }

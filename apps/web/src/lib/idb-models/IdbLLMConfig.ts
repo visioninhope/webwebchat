@@ -4,6 +4,7 @@ import { deleteModelFromList, upsertChatModel } from "$lib/stores/LLMConfigList"
 import { default_openai_fields } from "config-helpers/default-llm-configs/default_openai_fields";
 import { safeStringify } from "$lib/utils/safeStringify";
 import { defaultSystemMessage } from "$lib/constants/constants";
+import { LLMTypeEnum } from "shared-types/LLMTypeEnum";
 
 
 const DB_NAME = 'LLM_CONFIG_MODEL_DB';
@@ -24,17 +25,10 @@ interface ModelSchema extends DBSchema {
     };
 }
 
-export enum LLMIntegrationTypeName {
-    ChatOpenAI = "ChatOpenAI",
-    ChatAnthropic = "ChatAnthropic",
-    ChatOllama = "ChatOllama",
-    ChatOpenAIAzure = "ChatOpenAIAzure",
-}
-
 export class IdbLLMConfig {
     llmConfigId: string = NEW_LLM_CONFIG_ID;
     name: string = "";
-    type: LLMIntegrationTypeName = LLMIntegrationTypeName.ChatOpenAI;
+    type: LLMTypeEnum = LLMTypeEnum.ChatOpenAI;
     config: any = default_openai_fields;
     systemMessage: string = defaultSystemMessage;
 

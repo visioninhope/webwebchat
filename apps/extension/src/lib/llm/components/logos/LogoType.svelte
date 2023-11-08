@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { LLMIntegrationTypeName } from "$lib/idb-models/IdbLLMConfig";
+	import { LLMTypeEnum } from "shared-types/LLMTypeEnum";
 	import LogoAnthropic from "./LogoAnthropic.svelte";
 	import LogoAzure from "./LogoAzure.svelte";
 	import LogoOllama from "./LogoOllama.svelte";
@@ -7,13 +7,13 @@
 	export let type: string;
 </script>
 
-{#if type === LLMIntegrationTypeName.ChatOpenAI}
+{#if type === LLMTypeEnum.ChatOpenAI}
 	<LogoOpenai />
-{:else if type === LLMIntegrationTypeName.ChatAnthropic}
+{:else if type === LLMTypeEnum.ChatAnthropic}
 	<LogoAnthropic />
-{:else if type === LLMIntegrationTypeName.ChatOllama}
+{:else if type === LLMTypeEnum.ChatOllama}
 	<LogoOllama />
-{:else if type === LLMIntegrationTypeName.ChatOpenAIAzure}
+{:else if type === LLMTypeEnum.ChatOpenAIAzure}
 	<LogoAzure />
 {:else}
 	<span class="text-3xl">🫥</span>

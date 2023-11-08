@@ -6,7 +6,8 @@ import { default_openai_fields } from "config-helpers/default-llm-configs/defaul
 import { default_azure_fields } from "config-helpers/default-llm-configs/default_azure_fields";
 import { default_ollama_fields } from "config-helpers/default-llm-configs/default_ollama_fields";
 import type { BaseLanguageModel } from "langchain/base_language";
-import { LLMIntegrationTypeName, type IdbLLMConfig } from "../idb-models/IdbLLMConfig";
+import { type IdbLLMConfig } from "../idb-models/IdbLLMConfig";
+import { LLMTypeEnum } from "shared-types/LLMTypeEnum";
 
 export const testLLM = async (idbLLMConfig: IdbLLMConfig) => {
     try {
@@ -31,7 +32,7 @@ export const testLLM = async (idbLLMConfig: IdbLLMConfig) => {
 
 export const getLLM = (idbLLMConfig: IdbLLMConfig, callbacks?: Callbacks): BaseLanguageModel => {
     if (
-        idbLLMConfig.type === LLMIntegrationTypeName.ChatOpenAI
+        idbLLMConfig.type === LLMTypeEnum.ChatOpenAI
     ) {
         const configObj: typeof default_openai_fields = idbLLMConfig.config;
         if (
@@ -68,7 +69,7 @@ export const getLLM = (idbLLMConfig: IdbLLMConfig, callbacks?: Callbacks): BaseL
             callbacks,
         });
     } else if (
-        idbLLMConfig.type === LLMIntegrationTypeName.ChatOllama
+        idbLLMConfig.type === LLMTypeEnum.ChatOllama
     ) {
         const configObj: typeof default_ollama_fields = idbLLMConfig.config;
         return new ChatOllama({
@@ -76,7 +77,7 @@ export const getLLM = (idbLLMConfig: IdbLLMConfig, callbacks?: Callbacks): BaseL
             callbacks,
         });
     } else if (
-        idbLLMConfig.type === LLMIntegrationTypeName.ChatOpenAIAzure
+        idbLLMConfig.type === LLMTypeEnum.ChatOpenAIAzure
     ) {
         const configObj: typeof default_azure_fields = idbLLMConfig.config;
         if (configObj.azureOpenAIApiKey?.trim() === "") {

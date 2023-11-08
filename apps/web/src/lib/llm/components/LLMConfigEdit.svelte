@@ -10,10 +10,8 @@
 	import OllamaConfig from "./configs/Ollama/OllamaConfig.svelte";
 	import { testLLM } from "$lib/llm/getLLM";
 	import LogoType from "./logos/LogoType.svelte";
-	import {
-		LLMIntegrationTypeName,
-		IdbLLMConfig,
-	} from "$lib/idb-models/IdbLLMConfig";
+	import { IdbLLMConfig } from "$lib/idb-models/IdbLLMConfig";
+	import { LLMTypeEnum } from "shared-types/LLMTypeEnum";
 	const dispatch = createEventDispatcher();
 
 	export let idbLLMConfig: IdbLLMConfig;
@@ -35,13 +33,13 @@
 		});
 	}
 	function onChatProviderChange() {
-		if (idbLLMConfig.type === LLMIntegrationTypeName.ChatOpenAI) {
+		if (idbLLMConfig.type === LLMTypeEnum.ChatOpenAI) {
 			idbLLMConfig.config = default_openai_fields;
-		} else if (idbLLMConfig.type === LLMIntegrationTypeName.ChatOpenAIAzure) {
+		} else if (idbLLMConfig.type === LLMTypeEnum.ChatOpenAIAzure) {
 			idbLLMConfig.config = default_azure_fields;
-		} else if (idbLLMConfig.type === LLMIntegrationTypeName.ChatOllama) {
+		} else if (idbLLMConfig.type === LLMTypeEnum.ChatOllama) {
 			idbLLMConfig.config = default_ollama_fields;
-		} else if (idbLLMConfig.type === LLMIntegrationTypeName.ChatAnthropic) {
+		} else if (idbLLMConfig.type === LLMTypeEnum.ChatAnthropic) {
 			// do nothing
 		} else {
 			throw new Error(`Unknown chat provider type: ${idbLLMConfig.type}`);
@@ -70,7 +68,7 @@
 {#if idbLLMConfig}
 	<div class="divider">Select An LLM Provider</div>
 	<div class="join join-vertical lg:join-horizontal mb-5">
-		{#each Object.entries(LLMIntegrationTypeName) as [key, value]}
+		{#each Object.entries(LLMTypeEnum) as [key, value]}
 			<button
 				class="btn join-item {value === idbLLMConfig.type
 					? 'btn-primary'
@@ -109,21 +107,21 @@
 			bind:this={basicJsonEditor}
 			bind:config={idbLLMConfig.config}
 		/>
-		{#if idbLLMConfig.type === LLMIntegrationTypeName.ChatOpenAI}
+		{#if idbLLMConfig.type === LLMTypeEnum.ChatOpenAI}
 			<a
 				href="https://js.langchain.com/docs/api/chat_models_openai/classes/ChatOpenAI#constructors"
 				target="_blank"
 			>
 				ChatOpenAI
 			</a>
-		{:else if idbLLMConfig.type === LLMIntegrationTypeName.ChatOllama}
+		{:else if idbLLMConfig.type === LLMTypeEnum.ChatOllama}
 			<a
 				href="https://js.langchain.com/docs/api/chat_models_ollama/classes/ChatOllama#constructors"
 				target="_blank"
 			>
 				ChatOllama
 			</a>
-		{:else if idbLLMConfig.type === LLMIntegrationTypeName.ChatOpenAIAzure}
+		{:else if idbLLMConfig.type === LLMTypeEnum.ChatOpenAIAzure}
 			<a
 				href="https://js.langchain.com/docs/api/chat_models_openai/classes/ChatOpenAI#constructors"
 				target="_blank"
@@ -132,22 +130,22 @@
 			</a>
 		{/if}
 	{:else if activeTab === "FormEditor"}
-		{#if idbLLMConfig.type === LLMIntegrationTypeName.ChatOpenAI}
+		{#if idbLLMConfig.type === LLMTypeEnum.ChatOpenAI}
 			<OAIConfig bind:idbLLMConfig />
-		{:else if idbLLMConfig.type === LLMIntegrationTypeName.ChatOllama}
+		{:else if idbLLMConfig.type === LLMTypeEnum.ChatOllama}
 			<OllamaConfig bind:idbLLMConfig />
-		{:else if idbLLMConfig.type === LLMIntegrationTypeName.ChatAnthropic}
+		{:else if idbLLMConfig.type === LLMTypeEnum.ChatAnthropic}
 			Anthropic API does not allow requests from other websites.
 			<br />
 			Because of this reason, it is supported with extension only.
 			<br />
 			(Browser limitation: 'CORS')
-		{:else if idbLLMConfig.type === LLMIntegrationTypeName.ChatOpenAIAzure}
+		{:else if idbLLMConfig.type === LLMTypeEnum.ChatOpenAIAzure}
 			<AzureConfig bind:idbLLMConfig />
 		{/if}
 	{/if}
 
-	{#if idbLLMConfig.type === LLMIntegrationTypeName.ChatAnthropic}
+	{#if idbLLMConfig.type === LLMTypeEnum.ChatAnthropic}
 		<!-- hide -->
 	{:else}
 		<div class="divider mt-20" />
