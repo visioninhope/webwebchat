@@ -1,7 +1,7 @@
 <script lang="ts">
 	// import { helloSave } from "utils-vite-svelte/lib/storeHelpers/AutoSaveStoreClass";
 	import { isDevMode } from "utils-vite-svelte/lib/dev";
-	// import { BASE_NAV } from "$lib/constants/BASE_NAV";
+	// import { BASE_NAV } from "config-helpers/BASE_NAV";
 
 	const hello = async () => {
 		const instance = new ComlinkWorker<typeof import("./sampleWorker")>(

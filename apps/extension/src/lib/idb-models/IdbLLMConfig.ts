@@ -3,7 +3,7 @@ import { openDB, type DBSchema } from 'idb';
 import { deleteModelFromList, upsertChatModel } from "$lib/stores/LLMConfigList";
 import { default_openai_fields } from "config-helpers/default-llm-configs/default_openai_fields";
 import { safeStringify } from "utils-vite-svelte/lib/safeStringify";
-import { defaultSystemMessage } from "$lib/constants/constants";
+import { defaultSystemMessage } from "config-helpers/constants";
 import { LLMTypeEnum } from "shared-types/LLMTypeEnum";
 
 

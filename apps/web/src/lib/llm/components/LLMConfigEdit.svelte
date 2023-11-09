@@ -2,7 +2,7 @@
 	import { createEventDispatcher } from "svelte";
 	import BasicJsonEditor from "./configs/BasicJsonEditor.svelte";
 	import OAIConfig from "./configs/OpenAI/OpenAIConfig.svelte";
-	import { defaultSystemMessage } from "$lib/constants/constants";
+	import { defaultSystemMessage } from "config-helpers/constants";
 	import { default_openai_fields } from "config-helpers/default-llm-configs/default_openai_fields";
 	import { default_azure_fields } from "config-helpers/default-llm-configs/default_azure_fields";
 	import { default_ollama_fields } from "config-helpers/default-llm-configs/default_ollama_fields";

@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { appStateStore } from "$lib/stores/appStateStore";
-	import { BASE_NAV } from "$lib/constants/BASE_NAV";
+	import { BASE_NAV } from "config-helpers/BASE_NAV";
 	import TextareaResize from "ui/components/TextareaResize.svelte";
 	import { HumanMessage } from "langchain/schema";
 	import { location, push as goto } from "svelte-spa-router";

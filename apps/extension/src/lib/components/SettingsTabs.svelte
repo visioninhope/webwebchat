@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { BASE_NAV } from "$lib/constants/BASE_NAV";
+	import { BASE_NAV } from "config-helpers/BASE_NAV";
 	import { location } from "svelte-spa-router";
 </script>
 
