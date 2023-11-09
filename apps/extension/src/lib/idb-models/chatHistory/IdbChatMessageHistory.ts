@@ -1,8 +1,7 @@
 import { openDB, type DBSchema } from 'idb';
-import { BaseMessage, BaseListChatMessageHistory, type StoredMessage } from "langchain/schema";
+import { BaseMessage, BaseListChatMessageHistory, type StoredMessage, mapStoredMessageToChatMessage } from "langchain/schema";
 import {
-    mapChatMessagesToStoredMessages,
-    mapStoredMessagesToChatMessages,
+    mapChatMessagesToStoredMessages
 } from "./serializeMessageUtils";
 
 const DB_NAME = 'IDB_CHAT_MESSAGE_HISTORY_DB';
@@ -41,14 +40,27 @@ export class IdbChatMessageHistory extends BaseListChatMessageHistory {
         return history;
     }
 
+    // export type MessageContent = string | {
+    //     type: "text" | "image_url";
+    //     text?: string;
+    //     image_url?: string | {
+    //         url: string;
+    //     };
+    // }[];
     convertToLowerCaseSearchIndex(): string {
-        return this.messages.map((message) => message.content.toLowerCase()).join(" ");
+        return this.messages.map((message) => {
+            if (typeof message.content === 'string') {
+                return message.content.toLowerCase();
+            } else if (Array.isArray(message.content)) {
+                return message.content.map(item => item.text?.toLowerCase()).join(" ");
+            }
+        }).join(" ");
     }
 
     async load() {
         const db = await dbPromise;
         const storedValue = await db.get(CHAT_TABLE_NAME, this.chatId);
-        this.messages = mapStoredMessagesToChatMessages(storedValue?.messages || []);
+        this.messages = storedValue?.messages.map(mapStoredMessageToChatMessage) || [];
         return db
     }
 

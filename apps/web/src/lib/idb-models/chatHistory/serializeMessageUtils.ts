@@ -1,46 +1,14 @@
-
+// https://github.com/langchain-ai/langchainjs
+// langchain/src/stores/message/utils.ts
 import {
-    AIMessage,
     BaseMessage,
-    ChatMessage,
-    FunctionMessage,
-    HumanMessage,
-    SystemMessage,
-    type StoredMessage,
-    type FunctionMessageFieldsWithName,
-    type ChatMessageFieldsWithRole,
+    mapStoredMessageToChatMessage,
+    type StoredMessageData,
 } from "langchain/schema";
 
-interface StoredMessageV1 {
+export interface StoredMessage {
     type: string;
-    role: string | undefined;
-    text: string;
-}
-
-/**
- * Maps messages from an older format (V1) to the current `StoredMessage`
- * format. If the message is already in the `StoredMessage` format, it is
- * returned as is. Otherwise, it transforms the V1 message into a
- * `StoredMessage`. This function is important for maintaining
- * compatibility with older message formats.
- */
-export function mapV1MessageToStoredMessage(
-    message: StoredMessage | StoredMessageV1
-): StoredMessage {
-    // TODO: Remove this mapper when we deprecate the old message format.
-    if ((message as StoredMessage).data !== undefined) {
-        return message as StoredMessage;
-    } else {
-        const v1Message = message as StoredMessageV1;
-        return {
-            type: v1Message.type,
-            data: {
-                content: v1Message.text,
-                role: v1Message.role,
-                name: undefined,
-            },
-        };
-    }
+    data: StoredMessageData;
 }
 
 /**
@@ -54,32 +22,7 @@ export function mapV1MessageToStoredMessage(
 export function mapStoredMessagesToChatMessages(
     messages: StoredMessage[]
 ): BaseMessage[] {
-    return messages.map((message) => {
-        const storedMessage = mapV1MessageToStoredMessage(message);
-        switch (storedMessage.type) {
-            case "human":
-                return new HumanMessage(storedMessage.data);
-            case "ai":
-                return new AIMessage(storedMessage.data);
-            case "system":
-                return new SystemMessage(storedMessage.data);
-            case "function":
-                if (storedMessage.data.name === undefined) {
-                    throw new Error("Name must be defined for function messages");
-                }
-                return new FunctionMessage(
-                    storedMessage.data as FunctionMessageFieldsWithName
-                );
-            case "chat": {
-                if (storedMessage.data.role === undefined) {
-                    throw new Error("Role must be defined for chat messages");
-                }
-                return new ChatMessage(storedMessage.data as ChatMessageFieldsWithRole);
-            }
-            default:
-                throw new Error(`Got unexpected type: ${storedMessage.type}`);
-        }
-    });
+    return messages.map(mapStoredMessageToChatMessage);
 }
 
 /**
