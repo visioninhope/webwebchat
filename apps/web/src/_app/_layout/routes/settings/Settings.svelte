@@ -3,7 +3,7 @@
 	import GlobalAzure from "./global/GlobalAzure.svelte";
 	import GlobalOai from "./global/GlobalOai.svelte";
 	import ThemeSelect from "ui/components/settings/ThemeSelect.svelte";
-	import { themeStore } from "utils-vite-svelte/lib/shared-stores/themeStore";
+	import { themeStore } from "ui/components/settings/themeStore";
 </script>
 
 <SettingsTabs />
