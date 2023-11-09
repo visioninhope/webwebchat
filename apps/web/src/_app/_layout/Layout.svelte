@@ -17,7 +17,8 @@
 	import routes from "./router";
 
 	import Toast from "ui/components/toast/Toast.svelte";
-	import { appStateStore } from "$lib/stores/appStateStore";
+	// import { appStateStore } from "$lib/stores/appStateStore";
+	import { themeStore } from "utils-vite-svelte/lib/shared-stores/themeStore";
 
 	let checked = false;
 	function closeDrawer() {
@@ -30,15 +31,12 @@
 			.querySelector(".app-drawer-container")
 			?.classList.toggle("md:drawer-open");
 	}
-	appStateStore.subscribe((state) => {
-		document.body.setAttribute(
-			"data-theme",
-			state.theme ? state.theme : "auto"
-		);
-	});
 </script>
 
-<div class="drawer app-drawer-container md:drawer-open">
+<div
+	class="drawer app-drawer-container md:drawer-open"
+	data-theme={$themeStore.theme}
+>
 	<input id="my-drawer-3" type="checkbox" class="drawer-toggle" bind:checked />
 	<div class="drawer-content min-h-screen flex flex-col">
 		<Navbar {openSideBar} />

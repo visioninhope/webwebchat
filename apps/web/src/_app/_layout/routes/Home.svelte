@@ -1,5 +1,5 @@
 <script lang="ts">
-	// import { helloSave } from "utils-vite-svelte/lib/storeHelpers/AutoSaveStoreClass";
+	// import { helloSave } from "utils-vite-svelte/lib/store-helpers/AutoSaveStoreClass";
 	import { isDevMode } from "utils-vite-svelte/lib/dev";
 	// import { BASE_NAV } from "config-helpers/BASE_NAV";
 

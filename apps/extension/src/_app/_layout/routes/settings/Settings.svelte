@@ -3,7 +3,8 @@
 	import GlobalAnthropic from "./global/GlobalAnthropic.svelte";
 	import GlobalAzure from "./global/GlobalAzure.svelte";
 	import GlobalOai from "./global/GlobalOai.svelte";
-	import GlobalTheme from "./global/GlobalTheme.svelte";
+	import ThemeSelect from "ui/components/settings/ThemeSelect.svelte";
+	import { themeStore } from "utils-vite-svelte/lib/shared-stores/themeStore";
 </script>
 
 <SettingsTabs />
@@ -14,7 +15,12 @@
 </h1>
 
 <div class="mb-10">
-	<GlobalTheme />
+	<ThemeSelect
+		theme={$themeStore.theme}
+		setTheme={(selectedTheme) => {
+			$themeStore.theme = selectedTheme;
+		}}
+	/>
 </div>
 
 <div class="alert alert-warning mb-10">

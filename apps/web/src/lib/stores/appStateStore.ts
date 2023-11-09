@@ -1,5 +1,5 @@
 import { KEYVAL_KEYS } from 'config-helpers/idb-keys/KEYVAL_KEYS';
-import { AutoSaveStoreClass } from 'utils-vite-svelte/lib/storeHelpers/AutoSaveStoreClass';
+import { AutoSaveStoreClass } from 'utils-vite-svelte/lib/store-helpers/AutoSaveStoreClass';
 
 export class AppStateModel
     extends AutoSaveStoreClass<AppStateModel> // to make it observable like svelte store
@@ -8,7 +8,7 @@ export class AppStateModel
 
     isSendMessageOnEnterEnabled: boolean = true;
 
-    theme: "light" | "dark" | "auto" = 'auto';
+    theme: "light" | "dark" | "" = '';
 
     // ============ OpenAI ============
     openAIApiKey: string = "";
