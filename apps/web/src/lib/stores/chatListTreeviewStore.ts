@@ -1,8 +1,7 @@
 import { generateRandomId } from "utils-vite-svelte/lib/generateRandomId";
 import { KEYVAL_KEYS } from "$lib/constants/KEYVAL_KEYS";
 import { ChatManager } from "$lib/chat/ChatManager";
-import { StoreClass } from 'utils-vite-svelte/lib/storeHelpers/StoreClass';
-import { get as getKeyVal, set as setKeyVal } from 'idb-keyval';
+import { AutoSaveStoreClass } from 'utils-vite-svelte/lib/storeHelpers/AutoSaveStoreClass';
 import { debounce } from 'utils-vite-svelte/lib/debounce';
 import { IdbChatMessageHistory } from "$lib/idb-models/chatHistory/IdbChatMessageHistory";
 
@@ -16,19 +15,13 @@ export interface Item {
 }
 
 export class ChatListTreeviewModel
-    extends StoreClass<ChatListTreeviewModel> // to make it observable like svelte store
+    extends AutoSaveStoreClass<ChatListTreeviewModel> // to make it observable like svelte store
 {
     treeviewItems: Item[] = [];
     draggedItemId: string | null = null;
     searchString: string = "";
 }
 
-const enableAutoSave = async () => {
-    chatListTreeviewStore.subscribe(() => {
-        searchTreeView();
-        setKeyVal(KEYVAL_KEYS.CHATLIST_TREEVIEW_STATE, chatListTreeviewStore.serialize());
-    });
-}
 declare global {
     interface Window {
         searcIndex: { [id: string]: string; };
@@ -210,18 +203,7 @@ const searchTreeView = debounce(() => {
     }
 }, 400);
 
-const loadState = async () => {
-    try {
-        const storedValue = await getKeyVal<ChatListTreeviewModel>(KEYVAL_KEYS.CHATLIST_TREEVIEW_STATE);
-        if (storedValue) {
-            Object.assign(chatListTreeviewStore, storedValue);
-            chatListTreeviewStore.reRenderer();
-            generateSearchIndex();
-        }
-    } catch (error) {
-        console.error(`Failed to load state: ${error}`);
-    }
-}
+
 
 export const removeTreeChat = (id: string) => {
     const resultObj = findItem(chatListTreeviewStore.treeviewItems, id);
@@ -301,10 +283,31 @@ export function findItem(items: Item[], id: string): FindItemResult | null {
     return null;
 }
 
-export const chatListTreeviewStore = new ChatListTreeviewModel();
-Promise.resolve().then(async () => {
-    await loadState();
-    enableAutoSave();
-    chatListTreeviewStore.reRenderer();
-});
+export const chatListTreeviewStore = new ChatListTreeviewModel(KEYVAL_KEYS.CHATLIST_TREEVIEW_STATE);
 
+
+// Promise.resolve().then(async () => {
+//     await loadState();
+//     enableAutoSave();
+//     chatListTreeviewStore.reRenderer();
+// });
+
+// const loadState = async () => {
+//     try {
+//         const storedValue = await getKeyVal<ChatListTreeviewModel>(KEYVAL_KEYS.CHATLIST_TREEVIEW_STATE);
+//         if (storedValue) {
+//             Object.assign(chatListTreeviewStore, storedValue);
+//             chatListTreeviewStore.reRenderer();
+//             generateSearchIndex();
+//         }
+//     } catch (error) {
+//         console.error(`Failed to load state: ${error}`);
+//     }
+// }
+
+// const enableAutoSave = async () => {
+//     chatListTreeviewStore.subscribe(() => {
+//         searchTreeView();
+//         setKeyVal(KEYVAL_KEYS.CHATLIST_TREEVIEW_STATE, chatListTreeviewStore.serialize());
+//     });
+// }
