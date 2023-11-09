@@ -10,7 +10,7 @@ Browser.runtime.onInstalled.addListener(() => {
 
 Browser.action.onClicked.addListener(() => {
     chrome.tabs.create({
-        url: chrome.runtime.getURL('index.html'),
+        url: chrome.runtime.getURL('/#/'),
     });
 });
 
