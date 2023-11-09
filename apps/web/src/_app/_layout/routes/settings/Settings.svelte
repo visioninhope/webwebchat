@@ -1,9 +1,11 @@
 <script lang="ts">
 	import SettingsTabs from "$lib/components/SettingsTabs.svelte";
 	import GlobalAzure from "./global/GlobalAzure.svelte";
-	import GlobalOai from "./global/GlobalOai.svelte";
-	import ThemeSelect from "ui/components/settings/ThemeSelect.svelte";
-	import { themeStore } from "ui/components/settings/themeStore";
+	import ThemeSelect from "ui/components/settings/theme/themeSelect.svelte";
+	import { themeStore } from "ui/components/settings/theme/themeStore";
+
+	import { openAiApiKeyStore } from "ui/components/settings/openai/openAiApiKeyStore";
+	import OpenAiApiKey from "ui/components/settings/openai/OpenAiApiKey.svelte";
 </script>
 
 <SettingsTabs />
@@ -38,7 +40,8 @@
 </div>
 
 <div class="space-y-20">
-	<GlobalOai />
+	<OpenAiApiKey bind:key={$openAiApiKeyStore.openAIApiKey} />
+
 	<div class="divider" />
 
 	<GlobalAzure />

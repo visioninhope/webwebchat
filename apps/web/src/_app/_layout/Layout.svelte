@@ -18,7 +18,7 @@
 
 	import Toast from "ui/components/toast/Toast.svelte";
 	// import { appStateStore } from "$lib/stores/appStateStore";
-	import { themeStore } from "ui/components/settings/themeStore";
+	import { themeStore } from "ui/components/settings/theme/themeStore";
 
 	let checked = false;
 	function closeDrawer() {
