@@ -1,5 +1,5 @@
 import { KEYVAL_KEYS } from '$lib/constants/KEYVAL_KEYS';
-import { StoreClass } from 'utils-vite-svelte/lib/StoreClass';
+import { StoreClass } from 'utils-vite-svelte/lib/storeHelpers/StoreClass';
 import { get as getKeyVal, set as setKeyVal } from 'idb-keyval';
 import { IdbLLMConfig } from '$lib/idb-models/IdbLLMConfig';
 import { llmConfigList, waitUntil_llmConfigListReady } from '$lib/stores/LLMConfigList';

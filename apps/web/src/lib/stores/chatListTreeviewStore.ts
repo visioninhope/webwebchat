@@ -1,7 +1,7 @@
 import { generateRandomId } from "utils-vite-svelte/lib/generateRandomId";
 import { KEYVAL_KEYS } from "$lib/constants/KEYVAL_KEYS";
 import { ChatManager } from "$lib/chat/ChatManager";
-import { StoreClass } from 'utils-vite-svelte/lib/StoreClass';
+import { StoreClass } from 'utils-vite-svelte/lib/storeHelpers/StoreClass';
 import { get as getKeyVal, set as setKeyVal } from 'idb-keyval';
 import { debounce } from 'utils-vite-svelte/lib/debounce';
 import { IdbChatMessageHistory } from "$lib/idb-models/chatHistory/IdbChatMessageHistory";

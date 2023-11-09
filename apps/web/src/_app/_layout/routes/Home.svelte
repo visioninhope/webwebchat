@@ -1,4 +1,5 @@
 <script lang="ts">
+	// import { helloSave } from "utils-vite-svelte/lib/storeHelpers/AutoSaveStoreClass";
 	import { isDevMode } from "utils-vite-svelte/lib/dev";
 	// import { BASE_NAV } from "$lib/constants/BASE_NAV";
 
@@ -32,4 +33,6 @@
 </h1>
 <h1>Welcome isDevMode:{isDevMode}</h1>
 
-<button on:click={hello}>hello</button>
+<!-- <input type="text" bind:value={$helloSave.hello} /> -->
+
+<button on:click={hello}>hello worker world</button>

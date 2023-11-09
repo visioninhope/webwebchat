@@ -1,15 +1,19 @@
 import type { Writable } from 'svelte/store';
-import { safeStringify } from './safeStringify';
-
-function safe_not_equal(a: any, b: any): boolean {
-    return a != a ? b == b : a !== b || (a && typeof a === 'object') || typeof a === 'function';
-}
+import { safeStringify } from '../safeStringify';
+import { safe_not_equal } from '../safe_not_equal';
 
 export class StoreClass<T>
     implements Writable<T>
 {
     _subscribers: Set<(value: T) => void> = new Set();
-    [key: string]: any;
+    [key: string]: T | any;
+
+    shouldSerialize(key: string, value: unknown): boolean {
+        return typeof value !== 'function' &&
+            ![ // not serialize these keys
+                '_subscribers'
+            ].includes(key);
+    }
 
     constructor() {
         Promise.resolve().then(() => this.reRenderer());
@@ -23,11 +27,11 @@ export class StoreClass<T>
         };
     }
 
-    serialize(): { [key: string]: any } {
-        const serialized: { [key: string]: any } = {};
+    serialize(): { [key: string]: T } {
+        const serialized: { [key: string]: T } = {};
         for (const [key, value] of Object.entries(this)) {
-            if (typeof value !== 'function' && key !== '_subscribers') {
-                serialized[key] = value;
+            if (this.shouldSerialize(key, value)) {
+                serialized[key] = value as T;
             }
         }
         return JSON.parse(safeStringify(serialized));
@@ -55,7 +59,7 @@ export class StoreClass<T>
 
     _makePropertiesObservable(obj = this): void {
         for (const key of Object.keys(obj)) {
-            if (key === "_subscribers") {
+            if (!this.shouldSerialize(key, obj[key])) {
                 continue;
             }
             let _value = obj[key];
