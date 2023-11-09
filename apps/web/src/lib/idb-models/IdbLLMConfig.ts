@@ -1,8 +1,8 @@
-import { generateRandomId } from "$lib/utils/generateRandomString";
+import { generateRandomId } from "utils-vite-svelte/lib/generateRandomId";
 import { openDB, type DBSchema } from 'idb';
 import { deleteModelFromList, upsertChatModel } from "$lib/stores/LLMConfigList";
 import { default_openai_fields } from "config-helpers/default-llm-configs/default_openai_fields";
-import { safeStringify } from "$lib/utils/safeStringify";
+import { safeStringify } from "utils-vite-svelte/lib/safeStringify";
 import { defaultSystemMessage } from "$lib/constants/constants";
 import { LLMTypeEnum } from "shared-types/LLMTypeEnum";
 

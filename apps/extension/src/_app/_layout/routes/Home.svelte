@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { isDevMode } from "$lib/utils/dev";
+	import { isDevMode } from "utils-vite-svelte/lib/dev";
 	// import { BASE_NAV } from "$lib/constants/BASE_NAV";
 
 	const hello = async () => {
@@ -13,6 +13,6 @@
 	};
 </script>
 
-<h1>Welcome {isDevMode}</h1>
+<h1>Welcome isDevMode:{isDevMode}</h1>
 
 <button on:click={hello}>hello</button>

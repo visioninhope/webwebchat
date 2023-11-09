@@ -2,9 +2,9 @@ import { ChatAnthropic } from 'langchain/chat_models/anthropic';
 type ChatAnthropicFields = ConstructorParameters<typeof ChatAnthropic>[0];
 
 export const default_anthropic_fields: ChatAnthropicFields & {
-	// clientOptions?: ClientOptions;
-	overrideRequestHeaders: any;
-	overrideRequestBody: any;
+    // clientOptions?: ClientOptions;
+    overrideRequestHeaders: any;
+    overrideRequestBody: any;
 } = {
     /** Anthropic API key */
     anthropicApiKey: "",
@@ -42,7 +42,7 @@ export const default_anthropic_fields: ChatAnthropicFields & {
     stopSequences: [],
 
     /** Whether to stream the results or not */
-    streaming: false,
+    streaming: true,
 
     /** Anthropic API URL */
     anthropicApiUrl: "https://api.anthropic.com",

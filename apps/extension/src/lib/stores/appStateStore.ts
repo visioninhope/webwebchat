@@ -1,9 +1,9 @@
 import { KEYVAL_KEYS } from '$lib/constants/KEYVAL_KEYS';
-import { StoreClass } from '$lib/utils/StoreClass';
+import { StoreClass } from 'utils-vite-svelte/lib/StoreClass';
 import { get as getKeyVal, set as setKeyVal } from 'idb-keyval';
 import { IdbLLMConfig } from '$lib/idb-models/IdbLLMConfig';
 import { llmConfigList, waitUntil_llmConfigListReady } from '$lib/stores/LLMConfigList';
-import { debounce } from '$lib/utils/debounce';
+import { debounce } from 'utils-vite-svelte/lib/debounce';
 
 export class AppStateModel
     extends StoreClass<AppStateModel> // to make it observable like svelte store

@@ -1,4 +1,4 @@
-import { StoreClass } from "$lib/utils/StoreClass";
+import { StoreClass } from 'utils-vite-svelte/lib/StoreClass';
 import { LLMTypeEnum } from "shared-types/LLMTypeEnum";
 import { IdbLLMConfig, NEW_LLM_CONFIG_ID } from "$lib/idb-models/IdbLLMConfig";
 

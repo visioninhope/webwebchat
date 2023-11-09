@@ -144,11 +144,15 @@
 						</div>
 					</div>
 					<div class="w-full overflow-auto chat-message-container">
-						<MarkdownEditable
-							{index}
-							source={message.content}
-							on:save={saveMessage}
-						/>
+						{#if typeof message.content === "string"}
+							<MarkdownEditable
+								{index}
+								source={message.content}
+								on:save={saveMessage}
+							/>
+						{:else}
+							unknown message type
+						{/if}
 					</div>
 				</div>
 			{/each}
