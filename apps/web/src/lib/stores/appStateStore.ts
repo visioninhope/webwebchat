@@ -1,4 +1,4 @@
-import { KEYVAL_KEYS } from '$lib/constants/KEYVAL_KEYS';
+import { KEYVAL_KEYS } from 'config-helpers/idb-keys/KEYVAL_KEYS';
 import { AutoSaveStoreClass } from 'utils-vite-svelte/lib/storeHelpers/AutoSaveStoreClass';
 
 export class AppStateModel
