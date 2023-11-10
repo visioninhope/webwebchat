@@ -1,5 +1,6 @@
 {
     "editor.formatOnSave": true,
-    "javascript.preferences.importModuleSpecifier": "project-relative",
+    // "javascript.preferences.importModuleSpecifier": "project-relative",
+    "javascript.preferences.importModuleSpecifier": "non-relative",
     "typescript.tsserver.experimental.enableProjectDiagnostics": true // filter: !**/node_modules/**
 }
