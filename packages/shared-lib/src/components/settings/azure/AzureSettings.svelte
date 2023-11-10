@@ -1,6 +1,6 @@
 <script lang="ts">
-	import { appStateStore } from "$lib/stores/appStateStore";
-	import GlobalAzureApiKey from "./GlobalAzureApiKey.svelte";
+	import PasswordInputWrapper from "$lib/components/PasswordInputWrapper.svelte";
+	import { azureSettingsStore } from "./AzureSettingsStore";
 </script>
 
 <details>
@@ -10,14 +10,21 @@
 		Azure
 	</summary>
 	<div>
-		<GlobalAzureApiKey />
+		<div class="form-control mb-10">
+			<span class="label">
+				<span class="label-text">azureOpenAIApiKey</span>
+			</span>
+			<PasswordInputWrapper
+				bind:value={$azureSettingsStore.azureOpenAIApiKey}
+			/>
+		</div>
 
 		<div class="form-control mb-10">
 			<span class="label">
 				<span class="label-text">azureOpenAIApiVersion</span>
 			</span>
 			<input
-				bind:value={$appStateStore.azureOpenAIApiVersion}
+				bind:value={$azureSettingsStore.azureOpenAIApiVersion}
 				type="text"
 				class="input input-bordered"
 			/>
@@ -27,7 +34,7 @@
 				<span class="label-text">azureOpenAIApiInstanceName</span>
 			</span>
 			<input
-				bind:value={$appStateStore.azureOpenAIApiInstanceName}
+				bind:value={$azureSettingsStore.azureOpenAIApiInstanceName}
 				type="text"
 				class="input input-bordered"
 			/>
@@ -37,7 +44,7 @@
 				<span class="label-text">azureOpenAIApiDeploymentName</span>
 			</span>
 			<input
-				bind:value={$appStateStore.azureOpenAIApiDeploymentName}
+				bind:value={$azureSettingsStore.azureOpenAIApiDeploymentName}
 				type="text"
 				class="input input-bordered"
 			/>

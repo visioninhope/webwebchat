@@ -1,9 +1,9 @@
 <script lang="ts">
 	import SettingsTabs from "$lib/components/SettingsTabs.svelte";
-	import GlobalAzure from "./global/GlobalAzure.svelte";
 	import ThemeSelect from "shared-lib/src/components/settings/theme/themeSelect.svelte";
 	import { themeStore } from "shared-lib/src/components/settings/theme/themeStore";
 	import OpenAiSettings from "shared-lib/src/components/settings/openai/OpenAiSettings.svelte";
+	import AzureSettings from "shared-lib/src/components/settings/azure/AzureSettings.svelte";
 </script>
 
 <SettingsTabs />
@@ -42,5 +42,5 @@
 
 	<div class="divider" />
 
-	<GlobalAzure />
+	<AzureSettings />
 </div>
