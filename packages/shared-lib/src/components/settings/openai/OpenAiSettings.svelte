@@ -1,6 +1,6 @@
 <script lang="ts">
 	import PasswordInputWrapper from "$root/components/PasswordInputWrapper.svelte";
-	import { openAiSettingsStore } from "./openAiSettingsStore";
+	import { openAiSettingsStore } from "$root/stores/openAiSettingsStore";
 </script>
 
 <div class="form-control mb-10">

@@ -6,7 +6,7 @@
 	import AnthropicSettings from "shared-lib/src/components/settings/anthropic/AnthropicSettings.svelte";
 
 	import ThemeSettings from "shared-lib/src/components/settings/theme/ThemeSettings.svelte";
-	import { themeSettingsStore } from "shared-lib/src/components/settings/theme/themeSettingsStore";
+	import { themeSettingsStore } from "shared-lib/src/stores/themeSettingsStore";
 </script>
 
 <SettingsTabs />

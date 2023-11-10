@@ -9,7 +9,7 @@
 	import Options from "./Options.svelte";
 	import MarkdownEditable from "shared-lib/src/components/markdown/MarkdownEditable.svelte";
 	import Markdown from "shared-lib/src/components/markdown/Markdown.svelte";
-	import { chatSettingsStore } from "shared-lib/src/components/settings/chatSettingsStore";
+	import { chatSettingsStore } from "shared-lib/src/stores/chatSettingsStore";
 
 	export let params = {
 		chatId: "undefined_chatId",

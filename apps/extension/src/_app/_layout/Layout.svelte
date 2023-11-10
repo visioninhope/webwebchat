@@ -17,7 +17,7 @@
 	import routes from "./router";
 
 	import Toast from "shared-lib/src/components/toast/Toast.svelte";
-	import { themeSettingsStore } from "shared-lib/src/components/settings/theme/themeSettingsStore";
+	import { themeSettingsStore } from "shared-lib/src/stores/themeSettingsStore";
 
 	let checked = false;
 	function closeDrawer() {

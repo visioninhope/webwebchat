@@ -1,6 +1,6 @@
 <script lang="ts">
 	import PasswordInputWrapper from "$root/components/PasswordInputWrapper.svelte";
-	import { anthropicSettingsStore } from "./anthropicSettingsStore";
+	import { anthropicSettingsStore } from "$root/stores/anthropicSettingsStore";
 </script>
 
 <div class="form-control mb-10">

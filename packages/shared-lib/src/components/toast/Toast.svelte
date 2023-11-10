@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { toastStore } from "./toastStore";
+	import { toastStore } from "$root/stores/toastStore";
 </script>
 
 <div class="toast toast-top toast-end z-50">

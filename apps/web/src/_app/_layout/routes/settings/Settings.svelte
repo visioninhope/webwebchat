@@ -1,7 +1,7 @@
 <script lang="ts">
 	import SettingsTabs from "$lib/components/SettingsTabs.svelte";
 	import ThemeSettings from "shared-lib/src/components/settings/theme/ThemeSettings.svelte";
-	import { themeSettingsStore } from "shared-lib/src/components/settings/theme/themeSettingsStore";
+	import { themeSettingsStore } from "shared-lib/src/stores/themeSettingsStore";
 	import OpenAiSettings from "shared-lib/src/components/settings/openai/OpenAiSettings.svelte";
 	import AzureSettings from "shared-lib/src/components/settings/azure/AzureSettings.svelte";
 </script>

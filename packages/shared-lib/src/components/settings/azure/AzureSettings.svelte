@@ -1,6 +1,6 @@
 <script lang="ts">
 	import PasswordInputWrapper from "$root/components/PasswordInputWrapper.svelte";
-	import { azureSettingsStore } from "./AzureSettingsStore";
+	import { azureSettingsStore } from "$root/stores/azureSettingsStore";
 </script>
 
 <details>
