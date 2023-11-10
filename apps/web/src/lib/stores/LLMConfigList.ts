@@ -1,5 +1,5 @@
-import { StoreClass } from 'utils-vite-svelte/lib/store-helpers/StoreClass';
-import { LLMTypeEnum } from "shared-types/LLMTypeEnum";
+import { StoreClass } from 'shared-lib/src/utils/store-helpers/StoreClass';
+import { LLMTypeEnum } from "shared-lib/src/types/LLMTypeEnum";
 import { IdbLLMConfig, NEW_LLM_CONFIG_ID } from "$lib/idb-models/IdbLLMConfig";
 
 export type ChatModelListType = {

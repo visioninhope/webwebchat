@@ -1,5 +1,5 @@
 <script lang="ts">
-	import PasswordInputWrapper from "ui/components/PasswordInputWrapper.svelte";
+	import PasswordInputWrapper from "shared-lib/src/components/PasswordInputWrapper.svelte";
 	import { appStateStore } from "$lib/stores/appStateStore";
 </script>
 

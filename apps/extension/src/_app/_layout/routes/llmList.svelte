@@ -3,7 +3,7 @@
 	import { appStateStore } from "$lib/stores/appStateStore";
 	import SettingsTabs from "$lib/components/SettingsTabs.svelte";
 	import LogoType from "$lib/llm/components/logos/LogoType.svelte";
-	import DaisyModal from "ui/components/DaisyModal.svelte";
+	import DaisyModal from "shared-lib/src/components/DaisyModal.svelte";
 	import LlmConfigEdit from "$lib/llm/components/LLMConfigEdit.svelte";
 	import {
 		IdbLLMConfig,

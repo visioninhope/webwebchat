@@ -1,9 +1,9 @@
 <script lang="ts">
 	import SettingsTabs from "$lib/components/SettingsTabs.svelte";
 	import GlobalAzure from "./global/GlobalAzure.svelte";
-	import ThemeSelect from "ui/components/settings/theme/themeSelect.svelte";
-	import { themeStore } from "ui/components/settings/theme/themeStore";
-	import OpenAiApiKey from "ui/components/settings/openai/OpenAiApiKey.svelte";
+	import ThemeSelect from "shared-lib/src/components/settings/theme/themeSelect.svelte";
+	import { themeStore } from "shared-lib/src/components/settings/theme/themeStore";
+	import OpenAiApiKey from "shared-lib/src/components/settings/openai/OpenAiApiKey.svelte";
 </script>
 
 <SettingsTabs />

@@ -1,5 +1,5 @@
-import { KEYVAL_KEYS } from 'config-helpers/idb-keys/KEYVAL_KEYS';
-import { AutoSaveStoreClass } from 'utils-vite-svelte/lib/store-helpers/AutoSaveStoreClass';
+import { KEYVAL_KEYS } from '../../../constants/idb-keys/KEYVAL_KEYS';
+import { AutoSaveStoreClass } from '../../../utils/store-helpers/AutoSaveStoreClass';
 
 export class OpenAiApiKeyModel
     extends AutoSaveStoreClass<OpenAiApiKeyModel> // to make it observable like svelte store

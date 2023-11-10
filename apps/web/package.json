@@ -26,13 +26,10 @@
 		"svelte-preprocess": "5.0.4",
 		"svelte-spa-router": "^3.3.0",
 		"tailwind-config": "workspace:*",
-		"config-helpers": "workspace:*",
-		"shared-types": "workspace:*",
-		"utils-vite-svelte": "workspace:*",
 		"tailwindcss": "^3.3.3",
 		"tslib": "2.6.2",
 		"typescript": "5.2.2",
-		"ui": "workspace:*",
+		"shared-lib": "workspace:*",
 		"vite": "^4.4.5",
 		"vite-plugin-comlink": "^3.0.5"
 	}

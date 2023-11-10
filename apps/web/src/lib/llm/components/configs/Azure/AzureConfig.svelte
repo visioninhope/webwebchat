@@ -1,7 +1,7 @@
 <script lang="ts">
-	import PasswordInputWrapper from "ui/components/PasswordInputWrapper.svelte";
-	import { BASE_NAV } from "config-helpers/BASE_NAV";
-	import { defaultSystemMessage } from "config-helpers/constants";
+	import PasswordInputWrapper from "shared-lib/src/components/PasswordInputWrapper.svelte";
+	import { BASE_NAV } from "shared-lib/src/constants//BASE_NAV";
+	import { defaultSystemMessage } from "shared-lib/src/constants//constants";
 	import type { IdbLLMConfig } from "$lib/idb-models/IdbLLMConfig";
 	import ModelName from "./ModelName.svelte";
 	export let idbLLMConfig: IdbLLMConfig;

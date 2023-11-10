@@ -3,13 +3,13 @@ import type { Callbacks } from "langchain/callbacks";
 import { ChatAnthropic } from "langchain/chat_models/anthropic";
 import { ChatOllama } from "langchain/chat_models/ollama";
 import { appStateStore } from "$lib/stores/appStateStore";
-import { default_openai_fields } from "config-helpers/default-llm-configs/default_openai_fields";
-import { default_azure_fields } from "config-helpers/default-llm-configs/default_azure_fields";
-import { default_ollama_fields } from "config-helpers/default-llm-configs/default_ollama_fields";
-import { default_anthropic_fields } from "config-helpers/default-llm-configs/default_anthropic_fields";
+import { default_openai_fields } from "shared-lib/src/constants//default-llm-configs/default_openai_fields";
+import { default_azure_fields } from "shared-lib/src/constants//default-llm-configs/default_azure_fields";
+import { default_ollama_fields } from "shared-lib/src/constants//default-llm-configs/default_ollama_fields";
+import { default_anthropic_fields } from "shared-lib/src/constants//default-llm-configs/default_anthropic_fields";
 import type { BaseLanguageModel } from "langchain/base_language";
 import { type IdbLLMConfig } from "../idb-models/IdbLLMConfig";
-import { LLMTypeEnum } from "shared-types/LLMTypeEnum";
+import { LLMTypeEnum } from "shared-lib/src/types/LLMTypeEnum";
 
 export const testLLM = async (idbLLMConfig: IdbLLMConfig) => {
     try {

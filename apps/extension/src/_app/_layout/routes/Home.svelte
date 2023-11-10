@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { isDevMode } from "utils-vite-svelte/lib/dev";
+	import { isDevMode } from "shared-lib/src/utils/dev";
 
 	const hello = async () => {
 		const instance = new ComlinkWorker<typeof import("./sampleWorker")>(

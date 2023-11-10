@@ -7,7 +7,6 @@ import { ChatPromptTemplate, HumanMessagePromptTemplate, MessagesPlaceholder, Sy
 import { ConversationChain } from "langchain/chains";
 import { IdbChatOptions } from "$lib/idb-models/IdbChatOptions";
 import { IdbLLMConfig } from "$lib/idb-models/IdbLLMConfig";
-import { LLMTypeEnum } from "shared-types/LLMTypeEnum";
 
 export class ChatManager {
 

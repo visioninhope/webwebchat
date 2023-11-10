@@ -1,6 +1,6 @@
 <script lang="ts">
 	import type { ChatManager } from "$lib/chat/ChatManager";
-	import DaisyModal from "ui/components/DaisyModal.svelte";
+	import DaisyModal from "shared-lib/src/components/DaisyModal.svelte";
 	import {
 		IdbLLMConfig,
 		NEW_LLM_CONFIG_ID,

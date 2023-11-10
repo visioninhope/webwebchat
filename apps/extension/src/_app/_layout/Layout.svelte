@@ -16,8 +16,8 @@
 	import Router from "svelte-spa-router";
 	import routes from "./router";
 
-	import Toast from "ui/components/toast/Toast.svelte";
-	import { themeStore } from "ui/components/settings/theme/themeStore";
+	import Toast from "shared-lib/src/components/toast/Toast.svelte";
+	import { themeStore } from "shared-lib/src/components/settings/theme/themeStore";
 
 	let checked = false;
 	function closeDrawer() {

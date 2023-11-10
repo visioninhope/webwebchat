@@ -41,9 +41,6 @@ importers:
       comlink:
         specifier: ^4.4.1
         version: 4.4.1
-      config-helpers:
-        specifier: workspace:*
-        version: link:../../packages/config-helpers
       daisyui:
         specifier: ^3.7.3
         version: 3.7.3
@@ -59,9 +56,9 @@ importers:
       postcss:
         specifier: ^8.4.28
         version: 8.4.28
-      shared-types:
+      shared-lib:
         specifier: workspace:*
-        version: link:../../packages/shared-types
+        version: link:../../packages/shared-lib
       svelte:
         specifier: 4.2.0
         version: 4.2.0
@@ -86,12 +83,6 @@ importers:
       typescript:
         specifier: 5.2.2
         version: 5.2.2
-      ui:
-        specifier: workspace:*
-        version: link:../../packages/ui
-      utils-vite-svelte:
-        specifier: workspace:*
-        version: link:../../packages/utils-vite-svelte
       vite:
         specifier: ^4.4.5
         version: 4.4.5
@@ -128,9 +119,6 @@ importers:
       comlink:
         specifier: ^4.4.1
         version: 4.4.1
-      config-helpers:
-        specifier: workspace:*
-        version: link:../../packages/config-helpers
       daisyui:
         specifier: ^3.7.3
         version: 3.7.3
@@ -146,9 +134,9 @@ importers:
       postcss:
         specifier: ^8.4.28
         version: 8.4.28
-      shared-types:
+      shared-lib:
         specifier: workspace:*
-        version: link:../../packages/shared-types
+        version: link:../../packages/shared-lib
       svelte:
         specifier: 4.2.0
         version: 4.2.0
@@ -173,12 +161,6 @@ importers:
       typescript:
         specifier: 5.2.2
         version: 5.2.2
-      ui:
-        specifier: workspace:*
-        version: link:../../packages/ui
-      utils-vite-svelte:
-        specifier: workspace:*
-        version: link:../../packages/utils-vite-svelte
       vite:
         specifier: ^4.4.5
         version: 4.4.5
@@ -186,38 +168,7 @@ importers:
         specifier: ^3.0.5
         version: 3.0.5(comlink@4.4.1)(vite@4.4.5)
 
-  packages/config-helpers:
-    devDependencies:
-      langchain:
-        specifier: ^0.0.183
-        version: 0.0.183
-
-  packages/shared-types: {}
-
-  packages/tailwind-config: {}
-
-  packages/ui:
-    devDependencies:
-      '@tsconfig/svelte':
-        specifier: 5.0.2
-        version: 5.0.2
-      config-helpers:
-        specifier: workspace:*
-        version: link:../config-helpers
-      shared-types:
-        specifier: workspace:*
-        version: link:../shared-types
-      svelte:
-        specifier: 4.2.0
-        version: 4.2.0
-      svelte-markdown:
-        specifier: ^0.4.0
-        version: 0.4.0(svelte@4.2.0)
-      utils-vite-svelte:
-        specifier: workspace:*
-        version: link:../utils-vite-svelte
-
-  packages/utils-vite-svelte:
+  packages/shared-lib:
     devDependencies:
       '@sveltejs/vite-plugin-svelte':
         specifier: ^2.4.2
@@ -225,18 +176,18 @@ importers:
       '@tsconfig/svelte':
         specifier: ^5.0.0
         version: 5.0.2
-      config-helpers:
-        specifier: workspace:*
-        version: link:../config-helpers
       idb-keyval:
         specifier: ^6.2.1
         version: 6.2.1
       svelte:
-        specifier: ^4.0.5
+        specifier: 4.2.0
         version: 4.2.0
       svelte-check:
         specifier: ^3.4.6
         version: 3.5.0(postcss@8.4.28)(svelte@4.2.0)
+      svelte-markdown:
+        specifier: ^0.4.0
+        version: 0.4.0(svelte@4.2.0)
       tslib:
         specifier: ^2.6.0
         version: 2.6.2
@@ -246,6 +197,8 @@ importers:
       vite:
         specifier: ^4.4.5
         version: 4.4.5
+
+  packages/tailwind-config: {}
 
 packages:
 

@@ -1,8 +1,8 @@
-import { generateRandomId } from "utils-vite-svelte/lib/generateRandomId";
-import { KEYVAL_KEYS } from 'config-helpers/idb-keys/KEYVAL_KEYS';
+import { generateRandomId } from "shared-lib/src/utils/generateRandomId";
+import { KEYVAL_KEYS } from 'shared-lib/src/constants//idb-keys/KEYVAL_KEYS';
 import { ChatManager } from "$lib/chat/ChatManager";
-import { AutoSaveStoreClass } from 'utils-vite-svelte/lib/store-helpers/AutoSaveStoreClass';
-import { debounce } from 'utils-vite-svelte/lib/debounce';
+import { AutoSaveStoreClass } from 'shared-lib/src/utils/store-helpers/AutoSaveStoreClass';
+import { debounce } from 'shared-lib/src/utils/debounce';
 import { IdbChatMessageHistory } from "$lib/idb-models/chatHistory/IdbChatMessageHistory";
 
 export interface Item {

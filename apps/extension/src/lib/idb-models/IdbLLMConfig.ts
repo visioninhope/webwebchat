@@ -1,10 +1,10 @@
-import { generateRandomId } from "utils-vite-svelte/lib/generateRandomId";
+import { generateRandomId } from "shared-lib/src/utils/generateRandomId";
 import { openDB, type DBSchema } from 'idb';
 import { deleteModelFromList, upsertChatModel } from "$lib/stores/LLMConfigList";
-import { default_openai_fields } from "config-helpers/default-llm-configs/default_openai_fields";
-import { safeStringify } from "utils-vite-svelte/lib/safeStringify";
-import { defaultSystemMessage } from "config-helpers/constants";
-import { LLMTypeEnum } from "shared-types/LLMTypeEnum";
+import { default_openai_fields } from "shared-lib/src/constants//default-llm-configs/default_openai_fields";
+import { safeStringify } from "shared-lib/src/utils/safeStringify";
+import { defaultSystemMessage } from "shared-lib/src/constants//constants";
+import { LLMTypeEnum } from "shared-lib/src/types/LLMTypeEnum";
 
 
 const DB_NAME = 'LLM_CONFIG_MODEL_DB';

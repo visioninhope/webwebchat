@@ -1,7 +1,7 @@
 <script lang="ts">
 	// import { goto } from "$app/navigation";
 	import { push as goto } from "svelte-spa-router";
-	import { BASE_NAV } from "config-helpers/BASE_NAV";
+	import { BASE_NAV } from "shared-lib/src/constants//BASE_NAV";
 	import SortableList from "./SortableList/SortableList.svelte";
 	import { addChat, addFolder } from "$lib/stores/chatListTreeviewStore";
 	import SidebarSearch from "./SidebarSearch.svelte";

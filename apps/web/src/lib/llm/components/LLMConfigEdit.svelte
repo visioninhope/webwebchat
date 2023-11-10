@@ -2,16 +2,16 @@
 	import { createEventDispatcher } from "svelte";
 	import BasicJsonEditor from "./configs/BasicJsonEditor.svelte";
 	import OAIConfig from "./configs/OpenAI/OpenAIConfig.svelte";
-	import { defaultSystemMessage } from "config-helpers/constants";
-	import { default_openai_fields } from "config-helpers/default-llm-configs/default_openai_fields";
-	import { default_azure_fields } from "config-helpers/default-llm-configs/default_azure_fields";
-	import { default_ollama_fields } from "config-helpers/default-llm-configs/default_ollama_fields";
+	import { defaultSystemMessage } from "shared-lib/src/constants//constants";
+	import { default_openai_fields } from "shared-lib/src/constants//default-llm-configs/default_openai_fields";
+	import { default_azure_fields } from "shared-lib/src/constants//default-llm-configs/default_azure_fields";
+	import { default_ollama_fields } from "shared-lib/src/constants//default-llm-configs/default_ollama_fields";
 	import AzureConfig from "./configs/Azure/AzureConfig.svelte";
 	import OllamaConfig from "./configs/Ollama/OllamaConfig.svelte";
 	import { testLLM } from "$lib/llm/getLLM";
 	import LogoType from "./logos/LogoType.svelte";
 	import { IdbLLMConfig } from "$lib/idb-models/IdbLLMConfig";
-	import { LLMTypeEnum } from "shared-types/LLMTypeEnum";
+	import { LLMTypeEnum } from "shared-lib/src/types/LLMTypeEnum";
 	const dispatch = createEventDispatcher();
 
 	export let idbLLMConfig: IdbLLMConfig;

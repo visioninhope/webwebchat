@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { LLMTypeEnum } from "shared-types/LLMTypeEnum";
+	import { LLMTypeEnum } from "shared-lib/src/types/LLMTypeEnum";
 	import LogoAnthropic from "./LogoAnthropic.svelte";
 	import LogoAzure from "./LogoAzure.svelte";
 	import LogoOllama from "./LogoOllama.svelte";

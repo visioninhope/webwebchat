@@ -1,5 +1,5 @@
-import { KEYVAL_KEYS } from 'config-helpers/idb-keys/KEYVAL_KEYS';
-import { AutoSaveStoreClass } from 'utils-vite-svelte/lib/store-helpers/AutoSaveStoreClass';
+import { KEYVAL_KEYS } from 'shared-lib/src/constants//idb-keys/KEYVAL_KEYS';
+import { AutoSaveStoreClass } from 'shared-lib/src/utils/store-helpers/AutoSaveStoreClass';
 
 export class AppStateModel
     extends AutoSaveStoreClass<AppStateModel> // to make it observable like svelte store

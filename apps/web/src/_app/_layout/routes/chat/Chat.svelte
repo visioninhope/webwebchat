@@ -1,15 +1,15 @@
 <script lang="ts">
 	import { appStateStore } from "$lib/stores/appStateStore";
-	import { BASE_NAV } from "config-helpers/BASE_NAV";
-	import TextareaResize from "ui/components/TextareaResize.svelte";
+	import { BASE_NAV } from "shared-lib/src/constants/BASE_NAV";
+	import TextareaResize from "shared-lib/src/components/TextareaResize.svelte";
 	import { HumanMessage } from "langchain/schema";
-	import { location, push as goto } from "svelte-spa-router";
+	import { push as goto } from "svelte-spa-router";
 	import { ChatManager } from "$lib/chat/ChatManager";
 	import { onMount } from "svelte";
 	import Header from "./Header.svelte";
 	import Options from "./Options.svelte";
-	import MarkdownEditable from "ui/components/markdown/MarkdownEditable.svelte";
-	import Markdown from "ui/components/markdown/Markdown.svelte";
+	import MarkdownEditable from "shared-lib/src/components/markdown/MarkdownEditable.svelte";
+	import Markdown from "shared-lib/src/components/markdown/Markdown.svelte";
 
 	export let params = {
 		chatId: "undefined_chatId",

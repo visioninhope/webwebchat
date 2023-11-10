@@ -7,7 +7,7 @@
 	// import { goto } from "$app/navigation";
 	// import { page } from "$app/stores";
 	import { push as goto, params } from "svelte-spa-router";
-	import { BASE_NAV } from "config-helpers/BASE_NAV";
+	import { BASE_NAV } from "shared-lib/src/constants//BASE_NAV";
 	import { ChatManager } from "$lib/chat/ChatManager";
 
 	export let item: Item;
