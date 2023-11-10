@@ -3,8 +3,6 @@
 	import GlobalAzure from "./global/GlobalAzure.svelte";
 	import ThemeSelect from "ui/components/settings/theme/themeSelect.svelte";
 	import { themeStore } from "ui/components/settings/theme/themeStore";
-
-	import { openAiApiKeyStore } from "ui/components/settings/openai/openAiApiKeyStore";
 	import OpenAiApiKey from "ui/components/settings/openai/OpenAiApiKey.svelte";
 </script>
 
@@ -40,7 +38,7 @@
 </div>
 
 <div class="space-y-20">
-	<OpenAiApiKey bind:key={$openAiApiKeyStore.openAIApiKey} />
+	<OpenAiApiKey />
 
 	<div class="divider" />
 

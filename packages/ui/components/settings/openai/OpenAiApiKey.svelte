@@ -1,6 +1,6 @@
 <script lang="ts">
 	import PasswordInputWrapper from "../../PasswordInputWrapper.svelte";
-	export let key: string;
+	import { openAiApiKeyStore } from "./openAiApiKeyStore";
 </script>
 
 <div class="form-control mb-10">
@@ -14,5 +14,5 @@
 			(Get API key here)
 		</a>
 	</span>
-	<PasswordInputWrapper bind:value={key} />
+	<PasswordInputWrapper bind:value={$openAiApiKeyStore.openAIApiKey} />
 </div>
