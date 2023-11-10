@@ -17,7 +17,7 @@
 	import routes from "./router";
 
 	import Toast from "shared-lib/src/components/toast/Toast.svelte";
-	import { themeStore } from "shared-lib/src/components/settings/theme/themeStore";
+	import { themeSettingsStore } from "shared-lib/src/components/settings/theme/themeSettingsStore";
 
 	let checked = false;
 	function closeDrawer() {
@@ -34,7 +34,7 @@
 
 <div
 	class="drawer app-drawer-container md:drawer-open"
-	data-theme={$themeStore.theme}
+	data-theme={$themeSettingsStore.theme}
 >
 	<input id="my-drawer-3" type="checkbox" class="drawer-toggle" bind:checked />
 	<div class="drawer-content min-h-screen flex flex-col">

@@ -2,10 +2,10 @@
   "extends": "@tsconfig/svelte/tsconfig.json",
   "compilerOptions": {
     "paths": {
-      "$lib": [
+      "$root": [
         "./src"
       ],
-      "$lib/*": [
+      "$root/*": [
         "./src/*"
       ]
     },

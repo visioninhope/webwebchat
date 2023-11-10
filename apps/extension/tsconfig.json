@@ -7,6 +7,12 @@
             ],
             "$lib/*": [
                 "./src/lib/*"
+            ],
+            "$root": [
+                "../../packages/shared-lib/src"
+            ],
+            "$root/*": [
+                "../../packages/shared-lib/src/*"
             ]
         },
         "target": "ESNext",

@@ -8,7 +8,7 @@ export default defineConfig({
   plugins: [svelte()],
   resolve: {
     alias: {
-      '$lib': fileURLToPath(new URL('./src/', import.meta.url))
+      '$root': fileURLToPath(new URL('./src/', import.meta.url))
     }
   }
 })

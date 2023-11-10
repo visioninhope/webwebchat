@@ -20,7 +20,8 @@ export default ({ mode }) => {
     },
     resolve: {
       alias: {
-        '$lib': fileURLToPath(new URL('./src/lib/', import.meta.url))
+        '$lib': fileURLToPath(new URL('./src/lib/', import.meta.url)),
+        '$root': fileURLToPath(new URL('../../packages/shared-lib/src/', import.meta.url))
       }
     }
   });

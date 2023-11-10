@@ -1,7 +1,7 @@
 <script lang="ts">
 	import SettingsTabs from "$lib/components/SettingsTabs.svelte";
-	import ThemeSelect from "shared-lib/src/components/settings/theme/themeSelect.svelte";
-	import { themeStore } from "shared-lib/src/components/settings/theme/themeStore";
+	import ThemeSettings from "shared-lib/src/components/settings/theme/ThemeSettings.svelte";
+	import { themeSettingsStore } from "shared-lib/src/components/settings/theme/themeSettingsStore";
 	import OpenAiSettings from "shared-lib/src/components/settings/openai/OpenAiSettings.svelte";
 	import AzureSettings from "shared-lib/src/components/settings/azure/AzureSettings.svelte";
 </script>
@@ -14,10 +14,10 @@
 </h1>
 
 <div class="mb-10">
-	<ThemeSelect
-		theme={$themeStore.theme}
+	<ThemeSettings
+		theme={$themeSettingsStore.theme}
 		setTheme={(selectedTheme) => {
-			$themeStore.theme = selectedTheme;
+			$themeSettingsStore.theme = selectedTheme;
 		}}
 	/>
 </div>
