@@ -7,8 +7,6 @@ export class AppStateModel
 
     defaultLLMConfigId: string = "";
 
-    isSendMessageOnEnterEnabled: boolean = true;
-
     theme: "light" | "dark" | "" = '';
 
     // ============ OpenAI ============

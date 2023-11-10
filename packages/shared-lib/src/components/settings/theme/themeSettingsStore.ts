@@ -6,7 +6,7 @@ export class ThemeSettingsStore
 {
     theme: "light" | "dark" | "" = "";
 }
-export const themeSettingsStore = new ThemeSettingsStore(KEYVAL_KEYS.THEME_SETTINGS_STORE);
+export const themeSettingsStore = new ThemeSettingsStore(KEYVAL_KEYS.THEME_SETTINGS_STORE_KEY);
 
 
 

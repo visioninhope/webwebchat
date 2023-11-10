@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { appStateStore } from "$lib/stores/appStateStore";
 	import { BASE_NAV } from "shared-lib/src/constants/BASE_NAV";
 	import TextareaResize from "shared-lib/src/components/TextareaResize.svelte";
 	import { HumanMessage } from "langchain/schema";
@@ -10,6 +9,7 @@
 	import Options from "./Options.svelte";
 	import MarkdownEditable from "shared-lib/src/components/markdown/MarkdownEditable.svelte";
 	import Markdown from "shared-lib/src/components/markdown/Markdown.svelte";
+	import { chatSettingsStore } from "shared-lib/src/components/settings/chatSettingsStore";
 
 	export let params = {
 		chatId: "undefined_chatId",
@@ -47,7 +47,7 @@
 	function onkeydown(e: Event) {
 		if (
 			(e as KeyboardEvent).key === "Enter" &&
-			$appStateStore.isSendMessageOnEnterEnabled
+			$chatSettingsStore.isSendMessageOnEnterEnabled
 		) {
 			sendMesage();
 		}
@@ -213,7 +213,7 @@
 				</button>
 				<label
 					title="toogle return button"
-					class=" btn btn-sm btn-square swap {$appStateStore.isSendMessageOnEnterEnabled
+					class=" btn btn-sm btn-square swap {$chatSettingsStore.isSendMessageOnEnterEnabled
 						? ''
 						: 'opacity-30'} "
 				>
@@ -221,7 +221,7 @@
 					<input
 						class="btn-sm btn-square"
 						type="checkbox"
-						bind:checked={$appStateStore.isSendMessageOnEnterEnabled}
+						bind:checked={$chatSettingsStore.isSendMessageOnEnterEnabled}
 					/>
 					<div class="swap-on">⏎</div>
 					<div class="swap-off relative">
