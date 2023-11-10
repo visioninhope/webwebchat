@@ -1,3 +1,4 @@
+import { fileURLToPath, URL } from "url";
 import { defineConfig } from 'vite'
 import { svelte } from '@sveltejs/vite-plugin-svelte'
 
@@ -5,4 +6,9 @@ import { svelte } from '@sveltejs/vite-plugin-svelte'
 export default defineConfig({
   // root: 'lib',
   plugins: [svelte()],
+  resolve: {
+    alias: {
+      '$lib': fileURLToPath(new URL('./src/', import.meta.url))
+    }
+  }
 })

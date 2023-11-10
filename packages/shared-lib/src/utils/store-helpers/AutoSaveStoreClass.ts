@@ -51,10 +51,3 @@ export class AutoSaveStoreClass<T> extends StoreClass<T> {
         }
     }
 }
-
-
-// export class HelloSave extends AutoSaveStoreClass<HelloSave> {
-//     hello?: string;
-// }
-
-// export const helloSave = new HelloSave("HELLO_SAVE");

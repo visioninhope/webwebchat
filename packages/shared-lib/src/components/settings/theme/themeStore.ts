@@ -1,5 +1,5 @@
-import { KEYVAL_KEYS } from '../../../constants/idb-keys/KEYVAL_KEYS';
-import { AutoSaveStoreClass } from '../../../utils/store-helpers/AutoSaveStoreClass';
+import { KEYVAL_KEYS } from '$lib/constants/idb-keys/KEYVAL_KEYS';
+import { AutoSaveStoreClass } from '$lib/utils/store-helpers/AutoSaveStoreClass';
 
 export class ThemeStoreModel
     extends AutoSaveStoreClass<ThemeStoreModel> // to make it observable like svelte store

@@ -3,7 +3,7 @@
 	import GlobalAnthropic from "./global/GlobalAnthropic.svelte";
 	import GlobalAzure from "./global/GlobalAzure.svelte";
 
-	import OpenAiApiKey from "shared-lib/src/components/settings/openai/OpenAiApiKey.svelte";
+	import OpenAiSettings from "shared-lib/src/components/settings/openai/OpenAiSettings.svelte";
 
 	import ThemeSelect from "shared-lib/src/components/settings/theme/themeSelect.svelte";
 	import { themeStore } from "shared-lib/src/components/settings/theme/themeStore";
@@ -41,7 +41,7 @@
 </div>
 
 <div class="space-y-20">
-	<OpenAiApiKey />
+	<OpenAiSettings />
 	<div class="divider" />
 
 	<GlobalAnthropic />

@@ -1,7 +1,5 @@
 <script lang="ts">
-	// import { helloSave } from "shared-lib/src/utils/store-helpers/AutoSaveStoreClass";
 	import { isDevMode } from "shared-lib/src/utils/dev";
-	// import { BASE_NAV } from "shared-lib/src/constants//BASE_NAV";
 
 	const hello = async () => {
 		const instance = new ComlinkWorker<typeof import("./sampleWorker")>(
@@ -32,7 +30,5 @@
 	</i>
 </h1>
 <h1>Welcome isDevMode:{isDevMode}</h1>
-
-<!-- <input type="text" bind:value={$helloSave.hello} /> -->
 
 <button on:click={hello}>hello worker world</button>
