@@ -1,9 +1,9 @@
 <script lang="ts">
 	import SettingsTabs from "$lib/components/SettingsTabs.svelte";
-	import GlobalAnthropic from "./global/GlobalAnthropic.svelte";
 	import AzureSettings from "shared-lib/src/components/settings/azure/AzureSettings.svelte";
 
 	import OpenAiSettings from "shared-lib/src/components/settings/openai/OpenAiSettings.svelte";
+	import AnthropicSettings from "shared-lib/src/components/settings/anthropic/AnthropicSettings.svelte";
 
 	import ThemeSettings from "shared-lib/src/components/settings/theme/ThemeSettings.svelte";
 	import { themeSettingsStore } from "shared-lib/src/components/settings/theme/themeSettingsStore";
@@ -44,7 +44,7 @@
 	<OpenAiSettings />
 	<div class="divider" />
 
-	<GlobalAnthropic />
+	<AnthropicSettings />
 	<div class="divider" />
 
 	<AzureSettings />
