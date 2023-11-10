@@ -1,11 +1,11 @@
 <script lang="ts">
 	import SettingsTabs from "$lib/components/SettingsTabs.svelte";
-	import AzureSettings from "shared-lib/src/components/settings/azure/AzureSettings.svelte";
+	import AzureSettings from "shared-lib/src/components/settings/AzureSettings.svelte";
 
-	import OpenAiSettings from "shared-lib/src/components/settings/openai/OpenAiSettings.svelte";
-	import AnthropicSettings from "shared-lib/src/components/settings/anthropic/AnthropicSettings.svelte";
+	import OpenAiSettings from "shared-lib/src/components/settings/OpenAiSettings.svelte";
+	import AnthropicSettings from "shared-lib/src/components/settings/AnthropicSettings.svelte";
 
-	import ThemeSettings from "shared-lib/src/components/settings/theme/ThemeSettings.svelte";
+	import ThemeSettings from "shared-lib/src/components/settings/ThemeSettings.svelte";
 	import { themeSettingsStore } from "shared-lib/src/stores/themeSettingsStore";
 </script>
 
