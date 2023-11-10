@@ -11,5 +11,12 @@ export class AzureSettingsStore
     azureOpenAIApiInstanceName: string = "";
 
     azureOpenAIApiDeploymentName: string = "";
+
+    // azureOpenAIApiEmbeddingsDeploymentName: string = "";
+
+    // azureOpenAIApiCompletionsDeploymentName: string = "";
+
+    // azureOpenAIBasePath: string = "";
 }
+
 export const azureSettingsStore = new AzureSettingsStore(KEYVAL_KEYS.AZURE_SETTINGS_STORE_KEY);
