@@ -2,6 +2,7 @@
 
 - GlobalAnthropic.svelte??
 - do I need NEW_IDB_KEY? remove if you could
+- do I need "undefined_chatId"? remove if you could
 
 ## TODOS
 

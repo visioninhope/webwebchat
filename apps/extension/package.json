@@ -12,14 +12,17 @@
 		"build": "vite build",
 		"check": "svelte-check --tsconfig ./tsconfig.json"
 	},
+	"dependencies": {
+		"webextension-polyfill": "^0.10.0",
+		"@types/chrome": "0.0.243",
+		"@types/webextension-polyfill": "^0.10.5",
+		"@crxjs/vite-plugin": "2.0.0-beta.18"
+	},
 	"devDependencies": {
-		"@crxjs/vite-plugin": "2.0.0-beta.18",
 		"@fontsource/bricolage-grotesque": "^5.0.4",
 		"@sveltejs/vite-plugin-svelte": "2.4.5",
 		"@tailwindcss/typography": "^0.5.9",
 		"@tsconfig/svelte": "5.0.2",
-		"@types/chrome": "0.0.243",
-		"@types/webextension-polyfill": "^0.10.5",
 		"autoprefixer": "^10.4.15",
 		"comlink": "^4.4.1",
 		"daisyui": "^3.7.3",
@@ -37,7 +40,6 @@
 		"typescript": "5.2.2",
 		"shared-lib": "workspace:*",
 		"vite": "^4.4.5",
-		"vite-plugin-comlink": "^3.0.5",
-		"webextension-polyfill": "^0.10.0"
+		"vite-plugin-comlink": "^3.0.5"
 	}
 }

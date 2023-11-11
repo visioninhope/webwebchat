@@ -1,5 +1,5 @@
 <script lang="ts">
-	import PasswordInputWrapper from "$root/components/PasswordInputWrapper.svelte";
+	import PasswordInputWrapper from "$root/components/utils/PasswordInputWrapper.svelte";
 	import { BASE_NAV } from "$root/constants/BASE_NAV";
 	import type { IdbLLMConfigModel } from "$root/idb-models/IdbLLMConfigModel";
 	export let idbLLMConfigModel: IdbLLMConfigModel;

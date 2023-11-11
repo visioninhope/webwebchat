@@ -1,5 +1,5 @@
 <script lang="ts">
-	import PasswordInputWrapper from "$root/components/PasswordInputWrapper.svelte";
+	import PasswordInputWrapper from "$root/components/utils/PasswordInputWrapper.svelte";
 	import { anthropicSettingsStore } from "$root/stores/anthropicSettingsStore";
 </script>
 

@@ -1,19 +1,17 @@
 <script lang="ts">
-	import { BASE_NAV } from "shared-lib/src/constants/BASE_NAV";
-	import TextareaResize from "shared-lib/src/components/TextareaResize.svelte";
+	import { BASE_NAV } from "$root/constants/BASE_NAV";
+	import TextareaResize from "$root/components/utils/TextareaResize.svelte";
 	import { HumanMessage } from "langchain/schema";
 	import { push as goto } from "svelte-spa-router";
-	import { ChatManager } from "shared-lib/src/managers/ChatManager";
+	import { ChatManager } from "$root/managers/ChatManager";
 	import { onMount } from "svelte";
-	import Header from "shared-lib/src/components/chat/Header.svelte";
-	import Options from "shared-lib/src/components/chat/Options.svelte";
-	import MarkdownEditable from "shared-lib/src/components/markdown/MarkdownEditable.svelte";
-	import Markdown from "shared-lib/src/components/markdown/Markdown.svelte";
-	import { chatSettingsStore } from "shared-lib/src/stores/chatSettingsStore";
+	import Header from "$root/components/chat/Header.svelte";
+	import Options from "$root/components/chat/Options.svelte";
+	import MarkdownEditable from "$root/components/markdown/MarkdownEditable.svelte";
+	import Markdown from "$root/components/markdown/Markdown.svelte";
+	import { chatSettingsStore } from "$root/stores/chatSettingsStore";
 
-	export let params = {
-		chatId: "undefined_chatId",
-	};
+	export let chatId: string;
 
 	let isSendMessageLoading = false;
 	let streamingAIResponse = "";
@@ -25,7 +23,7 @@
 
 	onMount(async () => {
 		try {
-			chatManager = await ChatManager.withLoad(params.chatId);
+			chatManager = await ChatManager.withLoad(chatId);
 		} catch (e) {
 			console.log(e);
 			goto(BASE_NAV.HOME);
@@ -54,7 +52,7 @@
 	}
 
 	async function confirmDelete() {
-		await ChatManager.delete(params.chatId);
+		await ChatManager.delete(chatId);
 		goto(BASE_NAV.HOME);
 	}
 

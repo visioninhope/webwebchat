@@ -1,4 +1,4 @@
-import Layout from "./Layout.svelte";
+import Layout from "shared-lib/src/_webapp/Layout.svelte";
 
 function render() {
     const target = document.getElementById("app");

@@ -1,12 +1,12 @@
 <script lang="ts">
-	import { llmConfigListStore } from "shared-lib/src/stores/llmConfigListStore";
-	import SettingsTabs from "shared-lib/src/components/settings/SettingsTabs.svelte";
-	import LogoType from "shared-lib/src/components/logos/LogoType.svelte";
-	import DaisyModal from "shared-lib/src/components/DaisyModal.svelte";
-	import LlmConfigEdit from "shared-lib/src/components/llm/LLMConfigEdit.svelte";
-	import { IdbLLMConfigModel } from "shared-lib/src/idb-models/IdbLLMConfigModel";
-	import { NEW_IDB_KEY } from "shared-lib/src/constants/constants";
-	import { chatSettingsStore } from "shared-lib/src/stores/chatSettingsStore";
+	import { llmConfigListStore } from "$root/stores/llmConfigListStore";
+	import SettingsTabs from "$root/components/settings/SettingsTabs.svelte";
+	import LogoType from "$root/components/logos/LogoType.svelte";
+	import DaisyModal from "$root/components/utils/DaisyModal.svelte";
+	import LlmConfigEdit from "$root/components/llm/LLMConfigEdit.svelte";
+	import { IdbLLMConfigModel } from "$root/idb-models/IdbLLMConfigModel";
+	import { NEW_IDB_KEY } from "$root/constants/constants";
+	import { chatSettingsStore } from "$root/stores/chatSettingsStore";
 	let modalElement: DaisyModal;
 	let idbLLMConfigModel: IdbLLMConfigModel;
 

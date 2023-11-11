@@ -8,16 +8,14 @@
 	import "@fontsource/bricolage-grotesque/600.css";
 	import "@fontsource/bricolage-grotesque/700.css";
 	import "@fontsource/bricolage-grotesque/800.css";
-
-	import "shared-lib/src/css/app.css";
-	import Sidebar from "shared-lib/src/components/Sidebar/Sidebar.svelte";
-	import Navbar from "shared-lib/src/components/Navbar/Navbar.svelte";
+	import "$root/css/app.css";
+	import Sidebar from "$root/components/Sidebar/Sidebar.svelte";
+	import Navbar from "$root/components/Navbar/Navbar.svelte";
 	import { location } from "svelte-spa-router";
 	import Router from "svelte-spa-router";
 	import routes from "./router";
-
-	import Toast from "shared-lib/src/components/toast/Toast.svelte";
-	import { themeSettingsStore } from "shared-lib/src/stores/themeSettingsStore";
+	import Toast from "$root/components/toast/Toast.svelte";
+	import { themeSettingsStore } from "$root/stores/themeSettingsStore";
 
 	let checked = false;
 	function closeDrawer() {

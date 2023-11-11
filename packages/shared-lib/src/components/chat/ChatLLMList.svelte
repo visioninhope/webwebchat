@@ -1,6 +1,6 @@
 <script lang="ts">
 	import type { ChatManager } from "$root/managers/ChatManager";
-	import DaisyModal from "$root/components/DaisyModal.svelte";
+	import DaisyModal from "$root/components/utils/DaisyModal.svelte";
 	import { IdbLLMConfigModel } from "$root/idb-models/IdbLLMConfigModel";
 	import { NEW_IDB_KEY } from "$root/constants/constants";
 	import LlmConfigEdit from "$root/components/llm/LLMConfigEdit.svelte";

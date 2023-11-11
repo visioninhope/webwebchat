@@ -1,6 +1,6 @@
 <script lang="ts">
 	import type { ChatManager } from "$root/managers/ChatManager";
-	import DaisyModal from "$root/components/DaisyModal.svelte";
+	import DaisyModal from "$root/components/utils/DaisyModal.svelte";
 	import LogoType from "$root/components/logos/LogoType.svelte";
 
 	export let chatManager: ChatManager;
