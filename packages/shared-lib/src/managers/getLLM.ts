@@ -60,7 +60,7 @@ export const getLLM = (idbLLMConfigModel: IdbLLMConfigModel, callbacks?: Callbac
                 return fetch(input, options);
             }
         }
-
+        // use the global api key if the user has not specified one
         if (configObj.openAIApiKey?.trim() === "") {
             delete configObj.openAIApiKey;
         }
@@ -70,17 +70,34 @@ export const getLLM = (idbLLMConfigModel: IdbLLMConfigModel, callbacks?: Callbac
             callbacks,
         });
     } else if (
-        idbLLMConfigModel.type === LLMTypeEnum.ChatOllama
-    ) {
-        const configObj: typeof default_ollama_fields = idbLLMConfigModel.config;
-        return new ChatOllama({
-            ...configObj,
-            callbacks,
-        });
-    } else if (
         idbLLMConfigModel.type === LLMTypeEnum.ChatOpenAIAzure
     ) {
         const configObj: typeof default_azure_fields = idbLLMConfigModel.config;
+        if (
+            Object.keys(configObj.overrideRequestBody).length > 0 ||
+            Object.keys(configObj.overrideRequestHeaders).length > 0
+        ) {
+            if (!configObj.configuration) {
+                configObj.configuration = {};
+            }
+            configObj.configuration.fetch = function (input: RequestInfo | URL, init?: RequestInit) {
+                let options = { ...init };
+                if (Object.keys(configObj.overrideRequestHeaders).length > 0) {
+                    options.headers = {
+                        ...options?.headers,
+                        ...configObj.overrideRequestHeaders,
+                    };
+                }
+                if (Object.keys(configObj.overrideRequestBody).length > 0) {
+                    options.body = JSON.stringify({
+                        ...JSON.parse(options.body as string),
+                        ...configObj.overrideRequestBody,
+                    });
+                }
+                return fetch(input, options);
+            }
+        }
+        // use the global azure settings if the user has not specified one
         if (configObj.azureOpenAIApiKey?.trim() === "") {
             delete configObj.azureOpenAIApiKey;
         }
@@ -100,6 +117,14 @@ export const getLLM = (idbLLMConfigModel: IdbLLMConfigModel, callbacks?: Callbac
             azureOpenAIApiDeploymentName: azureSettingsStore.azureOpenAIApiDeploymentName,
             ...configObj,
             callbacks
+        });
+    } else if (
+        idbLLMConfigModel.type === LLMTypeEnum.ChatOllama
+    ) {
+        const configObj: typeof default_ollama_fields = idbLLMConfigModel.config;
+        return new ChatOllama({
+            ...configObj,
+            callbacks,
         });
     }
     throw new Error(`Unsupported chat model type: ${idbLLMConfigModel.type}`);

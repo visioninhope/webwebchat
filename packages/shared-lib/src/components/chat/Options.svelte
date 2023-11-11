@@ -2,6 +2,7 @@
 	import type { ChatManager } from "$root/managers/ChatManager";
 	import DaisyModal from "$root/components/utils/DaisyModal.svelte";
 	import LogoType from "$root/components/logos/LogoType.svelte";
+	import ChatLLMList from "./ChatLLMList.svelte";
 
 	export let chatManager: ChatManager;
 	let llmListModal: DaisyModal;
@@ -60,5 +61,5 @@
 	bind:this={llmListModal}
 	title="Select an LLM to use it for this chat"
 >
-	<slot />
+	<ChatLLMList {chatManager} on:use={useLLM} />
 </DaisyModal>
