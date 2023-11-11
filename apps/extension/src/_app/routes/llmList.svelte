@@ -3,7 +3,7 @@
 	import SettingsTabs from "shared-lib/src/components/settings/SettingsTabs.svelte";
 	import LogoType from "shared-lib/src/components/logos/LogoType.svelte";
 	import DaisyModal from "shared-lib/src/components/DaisyModal.svelte";
-	import LlmConfigEdit from "shared-lib/src/components/llm/LLMConfigEdit.svelte";
+	import LlmConfigEdit from "$lib/llm/LLMConfigEdit.svelte";
 	import { IdbLLMConfigModel } from "shared-lib/src/idb-models/IdbLLMConfigModel";
 	import { NEW_IDB_KEY } from "shared-lib/src/constants/constants";
 	import { chatSettingsStore } from "shared-lib/src/stores/chatSettingsStore";
@@ -57,8 +57,8 @@
 					{model.name}
 				</h2>
 				<p class="text-xs opacity-60">
-					<span class="badge badge-outline">{model.type}</span>
-					<span class="badge badge-outline">{model.model}</span>
+					<span class="border p-2">{model.type}</span>
+					<span class="border p-2">{model.model}</span>
 				</p>
 				<div class="card-actions justify-end">
 					<!-- href={BASE_NAV.LLM_MODEL(model.llmConfigId)} -->

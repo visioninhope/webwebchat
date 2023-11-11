@@ -8,8 +8,8 @@
 	import { llmConfigListStore } from "$root/stores/llmConfigListStore";
 	import { createEventDispatcher } from "svelte";
 	import { chatSettingsStore } from "$root/stores/chatSettingsStore";
-	const dispatch = createEventDispatcher();
 
+	const dispatch = createEventDispatcher();
 	export let chatManager: ChatManager;
 	let configEditModal: DaisyModal;
 	let idbLLMConfigModel: IdbLLMConfigModel;
@@ -62,8 +62,8 @@
 					{model.name}
 				</h2>
 				<p class="text-xs">
-					<span class="badge badge-outline">{model.type}</span>
-					<span class="badge badge-outline">{model.model}</span>
+					<span class="border p-2">{model.type}</span>
+					<span class="border p-2">{model.model}</span>
 				</p>
 				<div class="card-actions justify-end">
 					<button

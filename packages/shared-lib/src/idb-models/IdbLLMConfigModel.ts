@@ -1,9 +1,9 @@
 import { generateRandomId } from "$root/utils/generateRandomId";
 import { openDB, type DBSchema } from 'idb';
 import { deleteModelFromList, upsertChatModel } from "$root/stores/llmConfigListStore";
-import { default_openai_fields } from "$root/constants//default-llm-configs/default_openai_fields";
+import { default_openai_fields } from "$root/constants/default-llm-configs/default_openai_fields";
 import { safeStringify } from "$root/utils/safeStringify";
-import { NEW_IDB_KEY, defaultSystemMessage } from "$root/constants//constants";
+import { NEW_IDB_KEY, defaultSystemMessage } from "$root/constants/constants";
 import { LLMTypeEnum } from "$root/types/LLMTypeEnum";
 
 

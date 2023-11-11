@@ -2,7 +2,6 @@
 	import type { ChatManager } from "$root/managers/ChatManager";
 	import DaisyModal from "$root/components/DaisyModal.svelte";
 	import LogoType from "$root/components/logos/LogoType.svelte";
-	import LlmList from "./LLMList.svelte";
 
 	export let chatManager: ChatManager;
 	let llmListModal: DaisyModal;
@@ -46,10 +45,10 @@
 		<LogoType type={chatManager.idbLLMConfigModel.type} />
 		{chatManager.idbLLMConfigModel.name}
 		<p class="text-xs opacity-60">
-			<span class="badge badge-outline">
+			<span class="border p-2">
 				{chatManager.idbLLMConfigModel.type}
 			</span>
-			<span class="badge badge-outline">
+			<span class="border p-2">
 				{chatManager.idbLLMConfigModel.getModelName()}
 			</span>
 		</p>
@@ -61,5 +60,5 @@
 	bind:this={llmListModal}
 	title="Select an LLM to use it for this chat"
 >
-	<LlmList {chatManager} on:use={useLLM} />
+	<slot />
 </DaisyModal>

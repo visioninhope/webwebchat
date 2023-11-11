@@ -9,6 +9,7 @@
 	import Options from "shared-lib/src/components/chat/Options.svelte";
 	import MarkdownEditable from "shared-lib/src/components/markdown/MarkdownEditable.svelte";
 	import Markdown from "shared-lib/src/components/markdown/Markdown.svelte";
+	import LlmList from "$lib/chat/LLMList.svelte";
 	import { chatSettingsStore } from "shared-lib/src/stores/chatSettingsStore";
 
 	export let params = {
@@ -92,9 +93,9 @@
 			}
 		}
 
-		if (chatManager.chatHistory) {
-			chatManager.chatHistory.messages =
-				(await chatManager.chatHistory.getMessages()) || [];
+		if (chatManager.idbChatMessageHistoryModel) {
+			chatManager.idbChatMessageHistoryModel.messages =
+				(await chatManager.idbChatMessageHistoryModel.getMessages()) || [];
 		}
 		currentHumanInput = "";
 		streamingAIResponse = "";
@@ -106,9 +107,9 @@
 	async function saveMessage(event: CustomEvent) {
 		console.log("event.detail");
 		console.log(event.detail);
-		console.log("chatManager.chatHistory.messages");
-		console.log(chatManager.chatHistory.messages);
-		await chatManager.chatHistory.updateMessage(
+		console.log("chatManager.idbChatMessageHistoryModel.messages");
+		console.log(chatManager.idbChatMessageHistoryModel.messages);
+		await chatManager.idbChatMessageHistoryModel.updateMessage(
 			event.detail.content,
 			event.detail.index
 		);
@@ -121,12 +122,14 @@
 	</div>
 
 	{#if chatManager}
-		<Options {chatManager} />
+		<Options {chatManager}>
+			<LlmList {chatManager} on:use={useLLM} />
+		</Options>
 	{/if}
 
 	<div>
-		{#if chatManager?.chatHistory}
-			{#each chatManager.chatHistory?.messages || [] as message, index}
+		{#if chatManager?.idbChatMessageHistoryModel}
+			{#each chatManager.idbChatMessageHistoryModel?.messages || [] as message, index}
 				<div
 					class="my-6 rounded-lg px-3 py-2 flex {message instanceof HumanMessage
 						? ' border border-primary'

@@ -2,7 +2,7 @@
 	import { onMount } from "svelte";
 	import ModelName from "./ModelName.svelte";
 	import Code from "$root/components/markdown/renderers/Code.svelte";
-	import { defaultSystemMessage } from "$root/constants//constants";
+	import { defaultSystemMessage } from "$root/constants/constants";
 	import type { IdbLLMConfigModel } from "$root/idb-models/IdbLLMConfigModel";
 	export let idbLLMConfigModel: IdbLLMConfigModel;
 	let worigin = "";

@@ -10,7 +10,8 @@
 </script>
 
 <dialog bind:this={modalElement} class="modal">
-	<div class="modal-box w-11/12 max-w-full text-base-content p-0 border">
+	<div class="modal-box max-w-fit text-base-content p-0 border">
+		<!-- w-11/12  -->
 		<div class="sticky top-0 bg-base-200 h-10 z-40">
 			<div class="flex">
 				<div class="flex-grow">
@@ -25,9 +26,7 @@
 				</div>
 			</div>
 		</div>
-		<div class="p-2">
-			<slot />
-		</div>
+		<slot />
 	</div>
 	<form method="dialog" class="modal-backdrop">
 		<button>close</button>

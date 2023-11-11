@@ -1,4 +1,4 @@
-import { IdbChatMessageHistory } from "$root/idb-models/chatHistory/IdbChatMessageHistory";
+import { IdbChatMessageHistoryModel } from "$root/idb-models/chatHistory/IdbChatMessageHistoryModel";
 import { updateTreeItem, type Item, getTreeItem, removeTreeChat } from "$root/stores/chatListTreeviewStore";
 import type { Callbacks } from "langchain/callbacks";
 import { getLLM } from "./getLLM";
@@ -11,19 +11,19 @@ import { IdbLLMConfigModel } from "$root/idb-models/IdbLLMConfigModel";
 export class ChatManager {
 
     chatId: string;
-    chatHistory: IdbChatMessageHistory;
+    idbChatMessageHistoryModel: IdbChatMessageHistoryModel;
     idbChatOptionsModel: IdbChatOptionsModel;
     chatListTreeviewItem!: Item;
     idbLLMConfigModel!: IdbLLMConfigModel;
 
     constructor(
         chatId: string,
-        chatHistory: IdbChatMessageHistory,
+        chatHistory: IdbChatMessageHistoryModel,
         idbChatOptionsModel: IdbChatOptionsModel,
         chatListTreeviewItem: Item
     ) {
         this.chatId = chatId;
-        this.chatHistory = chatHistory;
+        this.idbChatMessageHistoryModel = chatHistory;
         this.idbChatOptionsModel = idbChatOptionsModel;
         this.chatListTreeviewItem = chatListTreeviewItem;
     }
@@ -33,7 +33,7 @@ export class ChatManager {
             chatHistory,
             chatOptions
         ] = await Promise.all([
-            IdbChatMessageHistory.withLoad(chatId),
+            IdbChatMessageHistoryModel.withLoad(chatId),
             IdbChatOptionsModel.withLoad(chatId)
         ]);
         const chatListTreeviewItem = getTreeItem(chatId);
@@ -65,7 +65,7 @@ export class ChatManager {
     static async delete(chatId: string) {
         await Promise.all([
             await IdbChatOptionsModel.delete(chatId),
-            await IdbChatMessageHistory.delete(chatId)
+            await IdbChatMessageHistoryModel.delete(chatId)
         ]);
         removeTreeChat(chatId);
     }
@@ -73,18 +73,18 @@ export class ChatManager {
     async checkAndSetChatTitle() {
         if (
             this.chatListTreeviewItem.name.trim() === "" &&
-            this.chatHistory &&
-            this.chatHistory.messages &&
-            this.chatHistory.messages.length >= 2
+            this.idbChatMessageHistoryModel &&
+            this.idbChatMessageHistoryModel.messages &&
+            this.idbChatMessageHistoryModel.messages.length >= 2
         ) {
             const { llm, llmConfig } = await this.getLLMandConfig();
             const titleGenMessage = `
 ------
 SYSTEM:${llmConfig.systemMessage}
 ------
-QUESTION: ${this.chatHistory.messages[0].content}
+QUESTION: ${this.idbChatMessageHistoryModel.messages[0].content}
 ------
-ANSWER: ${this.chatHistory.messages[1].content}
+ANSWER: ${this.idbChatMessageHistoryModel.messages[1].content}
 ------
 generate a short title for conversation above, 
 NEVER INCLUDE any other text in your answer
@@ -117,7 +117,7 @@ TITLE:
 
     async sendHumanInput(input: string, callbacks?: Callbacks) {
         const memory = new BufferMemory({
-            chatHistory: this.chatHistory,
+            chatHistory: this.idbChatMessageHistoryModel,
             returnMessages: true,
         });
         const { llm, llmConfig } = await this.getLLMandConfig(callbacks);

@@ -26,7 +26,7 @@ const dbPromise = openDB<ChatDB>(DB_NAME, 1, {
     },
 });
 
-export class IdbChatMessageHistory extends BaseListChatMessageHistory {
+export class IdbChatMessageHistoryModel extends BaseListChatMessageHistory {
     lc_namespace = ["langchain", "stores", "message", "idb"];
 
     private chatId: string;
@@ -38,7 +38,7 @@ export class IdbChatMessageHistory extends BaseListChatMessageHistory {
     }
 
     static async withLoad(chatId: string) {
-        const history = new IdbChatMessageHistory(chatId);
+        const history = new IdbChatMessageHistoryModel(chatId);
         await history.load();
         return history;
     }

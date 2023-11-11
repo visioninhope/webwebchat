@@ -1,14 +1,15 @@
-<!-- <script lang="ts">
-	import PasswordInputWrapper from "$root/components/PasswordInputWrapper.svelte";
-	import { BASE_NAV } from "$root/constants/BASE_NAV";
-	import { defaultSystemMessage } from "$root/constants//constants";
-	import type { IdbLLMConfig } from "$lib/idb-models/IdbLLMConfig";
+<script lang="ts">
+	import AnthropicSettings from "$root/components/settings/AnthropicSettings.svelte";
+	import { defaultSystemMessage } from "$root/constants/constants";
+	import type { IdbLLMConfigModel } from "$root/idb-models/IdbLLMConfigModel";
 	import ModelName from "./ModelName.svelte";
-	export let idbLLMConfig: IdbLLMConfig;
+	export let idbLLMConfigModel: IdbLLMConfigModel;
 </script>
 
 <div class="space-y-20">
-	<ModelName bind:modelName={idbLLMConfig.config.modelName} />
+	<AnthropicSettings />
+
+	<ModelName bind:modelName={idbLLMConfigModel.config.modelName} />
 
 	<div class="">
 		<div class="flex items-center">
@@ -18,7 +19,7 @@
 					class="btn btn-sm btn-outline"
 					type="button"
 					on:click={() => {
-						idbLLMConfig.systemMessage = defaultSystemMessage;
+						idbLLMConfigModel.systemMessage = defaultSystemMessage;
 					}}
 				>
 					(Reset to default)
@@ -38,7 +39,7 @@
 			placeholder={defaultSystemMessage}
 			class="textarea w-full textarea-bordered"
 			rows="3"
-			bind:value={idbLLMConfig.systemMessage}
+			bind:value={idbLLMConfigModel.systemMessage}
 		/>
 	</div>
 
@@ -46,11 +47,11 @@
 		<input
 			type="checkbox"
 			class="toggle"
-			bind:checked={idbLLMConfig.config.streaming}
+			bind:checked={idbLLMConfigModel.config.streaming}
 		/>
 		<span class="label-text">
 			Stream AI responses word by word
-			{idbLLMConfig.config.streaming ? "(enabled)" : "(disabled)"}
+			{idbLLMConfigModel.config.streaming ? "(enabled)" : "(disabled)"}
 		</span>
 	</label>
 
@@ -62,16 +63,16 @@
 		>
 			More customizations
 		</summary>
-		<div class="space-y-20">
+		<div class="space-y-20 m-5 border p-5">
 			<div class="">
 				<div class="font-semibold space-x-2 flex">
 					<div>
-						<span>Temperature: {idbLLMConfig.config.temperature}</span>
+						<span>Temperature: {idbLLMConfigModel.config.temperature}</span>
 						<button
 							class="btn btn-sm btn-outline"
 							type="button"
 							on:click={() => {
-								idbLLMConfig.config.temperature = 1;
+								idbLLMConfigModel.config.temperature = 1;
 							}}
 						>
 							(Reset to default)
@@ -94,7 +95,7 @@
 				<input
 					type="range"
 					class="range range-primary"
-					bind:value={idbLLMConfig.config.temperature}
+					bind:value={idbLLMConfigModel.config.temperature}
 					min="0"
 					max="1"
 					step="0.1"
@@ -111,12 +112,12 @@
 			<div class="">
 				<div class="font-semibold space-x-2 flex">
 					<div>
-						<span>Top K: {idbLLMConfig.config.topK}</span>
+						<span>Top K: {idbLLMConfigModel.config.topK}</span>
 						<button
 							class="btn btn-sm btn-outline"
 							type="button"
 							on:click={() => {
-								idbLLMConfig.config.topK = -1;
+								idbLLMConfigModel.config.topK = -1;
 							}}
 						>
 							(Reset to default)
@@ -139,7 +140,7 @@
 				<input
 					type="text"
 					class="input input-bordered"
-					bind:value={idbLLMConfig.config.topK}
+					bind:value={idbLLMConfigModel.config.topK}
 				/>
 			</div>
 
@@ -148,12 +149,12 @@
 			<div class="">
 				<div class="font-semibold space-x-2 flex">
 					<div>
-						<span>Top P: {idbLLMConfig.config.topP}</span>
+						<span>Top P: {idbLLMConfigModel.config.topP}</span>
 						<button
 							class="btn btn-sm btn-outline"
 							type="button"
 							on:click={() => {
-								idbLLMConfig.config.topP = 1;
+								idbLLMConfigModel.config.topP = 1;
 							}}
 						>
 							(Reset to default)
@@ -182,7 +183,7 @@
 					min="0"
 					max="1"
 					step="0.1"
-					bind:value={idbLLMConfig.config.topP}
+					bind:value={idbLLMConfigModel.config.topP}
 				/>
 			</div>
 
@@ -197,7 +198,7 @@
 								class="btn btn-sm btn-outline"
 								type="button"
 								on:click={() => {
-									idbLLMConfig.config.anthropicApiUrl =
+									idbLLMConfigModel.config.anthropicApiUrl =
 										"https://api.anthropic.com";
 								}}
 							>
@@ -206,7 +207,7 @@
 						</span>
 					</div>
 					<input
-						bind:value={idbLLMConfig.config.anthropicApiUrl}
+						bind:value={idbLLMConfigModel.config.anthropicApiUrl}
 						type="text"
 						class="input input-bordered"
 					/>
@@ -215,35 +216,6 @@
 		</div>
 	</details>
 
-	<div class="divider" />
-
-	<details>
-		<summary
-			class="text-primary font-semibold my-2 cursor-pointer hover:underline"
-		>
-			Override global settings
-		</summary>
-		<div class="form-control mb-10">
-			<span class="label">
-				<span class="label-text">Anthropic API Key</span>
-				<a
-					class="link"
-					target="_blank"
-					href="https://console.anthropic.com/account/keys"
-				>
-					(Get API key here)
-				</a>
-			</span>
-			<div class="text-xs my-1">
-				If empty, the <u>Anthropic API KEY</u>
-				in the
-				<a href={BASE_NAV.SETTINGS}>global settings</a>
-				will be used.
-				<br />
-				However, if you want to use a different API key for this model, you can enter
-				it here.
-			</div>
-			<PasswordInputWrapper bind:value={idbLLMConfig.config.anthropicApiKey} />
-		</div>
-	</details>
-</div> -->
+	<!-- <div class="divider" />
+	<OverrideApiKey /> -->
+</div>

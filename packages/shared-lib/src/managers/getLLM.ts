@@ -1,9 +1,9 @@
 import { ChatOpenAI } from "langchain/chat_models/openai";
 import type { Callbacks } from "langchain/callbacks";
 import { ChatOllama } from "langchain/chat_models/ollama";
-import { default_openai_fields } from "$root/constants//default-llm-configs/default_openai_fields";
-import { default_azure_fields } from "$root/constants//default-llm-configs/default_azure_fields";
-import { default_ollama_fields } from "$root/constants//default-llm-configs/default_ollama_fields";
+import { default_openai_fields } from "$root/constants/default-llm-configs/default_openai_fields";
+import { default_azure_fields } from "$root/constants/default-llm-configs/default_azure_fields";
+import { default_ollama_fields } from "$root/constants/default-llm-configs/default_ollama_fields";
 import type { BaseLanguageModel } from "langchain/base_language";
 import { type IdbLLMConfigModel } from "$root/idb-models/IdbLLMConfigModel";
 import { LLMTypeEnum } from "$root/types/LLMTypeEnum";

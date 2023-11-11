@@ -1,13 +1,14 @@
 <script lang="ts">
-	import PasswordInputWrapper from "$root/components/PasswordInputWrapper.svelte";
-	import { BASE_NAV } from "$root/constants/BASE_NAV";
-	import { defaultSystemMessage } from "$root/constants//constants";
+	import OpenAiSettings from "$root/components/settings/OpenAiSettings.svelte";
+	import { defaultSystemMessage } from "$root/constants/constants";
 	import type { IdbLLMConfigModel } from "$root/idb-models/IdbLLMConfigModel";
 	import ModelName from "./ModelName.svelte";
 	export let idbLLMConfigModel: IdbLLMConfigModel;
 </script>
 
 <div class="space-y-20">
+	<OpenAiSettings />
+
 	<ModelName bind:modelName={idbLLMConfigModel.config.modelName} />
 
 	<div>
@@ -64,7 +65,7 @@
 		>
 			More customizations
 		</summary>
-		<div class="space-y-20">
+		<div class="space-y-20 m-5 border p-5">
 			<div class="">
 				<div class="font-semibold space-x-2 flex">
 					<div>
@@ -293,37 +294,6 @@
 		</div>
 	</details>
 
-	<div class="divider" />
-
-	<details>
-		<summary
-			class="text-primary font-semibold my-2 cursor-pointer hover:underline"
-		>
-			Override global settings
-		</summary>
-		<div class="form-control mb-10">
-			<span class="label">
-				<span class="label-text">OpenAI API Key</span>
-				<a
-					class="link"
-					target="_blank"
-					href="https://platform.openai.com/account/api-keys"
-				>
-					(Get API key here)
-				</a>
-			</span>
-			<div class="text-xs my-1">
-				If empty, the <u>OpenAI API KEY</u>
-				in the
-				<a href={BASE_NAV.SETTINGS}>global settings</a>
-				will be used.
-				<br />
-				However, if you want to use a different API key for this model, you can enter
-				it here.
-			</div>
-			<PasswordInputWrapper
-				bind:value={idbLLMConfigModel.config.openAIApiKey}
-			/>
-		</div>
-	</details>
+	<!-- <div class="divider" />
+	<OverrideApiKey /> -->
 </div>

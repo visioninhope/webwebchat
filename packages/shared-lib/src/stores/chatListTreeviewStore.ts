@@ -1,9 +1,9 @@
 import { generateRandomId } from "$root/utils/generateRandomId";
-import { KEYVAL_KEYS } from '$root/constants//idb-keys/KEYVAL_KEYS';
+import { KEYVAL_KEYS } from '$root/constants/idb-keys/KEYVAL_KEYS';
 import { AutoSaveStoreClass } from '$root/utils/store-helpers/AutoSaveStoreClass';
 import { debounce } from '$root/utils/debounce';
 import { ChatManager } from "$root/managers/ChatManager";
-import { IdbChatMessageHistory } from "$root/idb-models/chatHistory/IdbChatMessageHistory";
+import { IdbChatMessageHistoryModel } from "$root/idb-models/chatHistory/IdbChatMessageHistoryModel";
 
 export interface Item {
     id: string;
@@ -39,7 +39,7 @@ export const generateSearchIndex = async () => {
                 searchIndex[chatListTreeviewStore.treeviewItems[i].children![j].id] =
                     chatListTreeviewStore.treeviewItems[i].children![j].name.toLowerCase() + " "
                     +
-                    (await IdbChatMessageHistory
+                    (await IdbChatMessageHistoryModel
                         .withLoad(chatListTreeviewStore.treeviewItems[i].children![j].id))
                         .convertToLowerCaseSearchIndex();
             }
@@ -47,7 +47,7 @@ export const generateSearchIndex = async () => {
             searchIndex[chatListTreeviewStore.treeviewItems[i].id] =
                 chatListTreeviewStore.treeviewItems[i].name.toLowerCase() + " "
                 +
-                (await IdbChatMessageHistory
+                (await IdbChatMessageHistoryModel
                     .withLoad(chatListTreeviewStore.treeviewItems[i].id))
                     .convertToLowerCaseSearchIndex();
 

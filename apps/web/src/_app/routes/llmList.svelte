@@ -57,8 +57,8 @@
 					{model.name}
 				</h2>
 				<p class="text-xs opacity-60">
-					<span class="badge badge-outline">{model.type}</span>
-					<span class="badge badge-outline">{model.model}</span>
+					<span class="border p-2">{model.type}</span>
+					<span class="border p-2">{model.model}</span>
 				</p>
 				<div class="card-actions justify-end">
 					<!-- href={BASE_NAV.LLM_MODEL(model.llmConfigId)} -->

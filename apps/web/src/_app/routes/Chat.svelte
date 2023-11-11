@@ -92,9 +92,9 @@
 			}
 		}
 
-		if (chatManager.chatHistory) {
-			chatManager.chatHistory.messages =
-				(await chatManager.chatHistory.getMessages()) || [];
+		if (chatManager.idbChatMessageHistoryModel) {
+			chatManager.idbChatMessageHistoryModel.messages =
+				(await chatManager.idbChatMessageHistoryModel.getMessages()) || [];
 		}
 		currentHumanInput = "";
 		streamingAIResponse = "";
@@ -106,9 +106,9 @@
 	async function saveMessage(event: CustomEvent) {
 		console.log("event.detail");
 		console.log(event.detail);
-		console.log("chatManager.chatHistory.messages");
-		console.log(chatManager.chatHistory.messages);
-		await chatManager.chatHistory.updateMessage(
+		console.log("chatManager.idbChatMessageHistoryModel.messages");
+		console.log(chatManager.idbChatMessageHistoryModel.messages);
+		await chatManager.idbChatMessageHistoryModel.updateMessage(
 			event.detail.content,
 			event.detail.index
 		);
@@ -125,8 +125,8 @@
 	{/if}
 
 	<div>
-		{#if chatManager?.chatHistory}
-			{#each chatManager.chatHistory?.messages || [] as message, index}
+		{#if chatManager?.idbChatMessageHistoryModel}
+			{#each chatManager.idbChatMessageHistoryModel?.messages || [] as message, index}
 				<div
 					class="my-6 rounded-lg px-3 py-2 flex {message instanceof HumanMessage
 						? ' border border-primary'
