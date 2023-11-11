@@ -101,15 +101,7 @@ TITLE:
 
     async getLLMandConfig(callbacks?: Callbacks) {
         const llmConfig = await IdbLLMConfigModel.withLoad(this.idbChatOptionsModel.llmConfigId);
-
-        // Anthropic removed from SPA, I do not want to add a proxy server for now.
-        // if (llmConfig.type === LLMTypeEnum.ChatAnthropic) {
-        //     llmConfig.config.overrideRequestHeaders = {
-        //         "revproxyhost": "api.anthropic.com"
-        //     }
-        //     llmConfig.config.anthropicApiUrl = import.meta.env.DEV ? "http://localhost:3348" : "https://proxy.webwebchat.com";
-        // }
-
+        // no need to use getLLMBase because extension specific settings are not used in the SPA
         const llm = getLLM(llmConfig, callbacks);
         return { llm, llmConfig };
     }

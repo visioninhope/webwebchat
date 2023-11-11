@@ -15,7 +15,7 @@ import { anthropicSettingsStore } from "$root/stores/anthropicSettingsStore";
 
 export const testLLM = async (idbLLMConfigModel: IdbLLMConfigModel) => {
     try {
-        const llm = getLLMExtension(idbLLMConfigModel);
+        const llm = getLLM(idbLLMConfigModel);
         const options: any = {
             maxConcurrency: 1,
             maxRetries: 1,
@@ -143,17 +143,15 @@ export const getChatAnthropic = (idbLLMConfigModel: IdbLLMConfigModel, callbacks
         callbacks
     });
 }
-
-export const getLLMExtension = (idbLLMConfigModel: IdbLLMConfigModel, callbacks?: Callbacks): BaseLanguageModel => {
+export const getLLM = (idbLLMConfigModel: IdbLLMConfigModel, callbacks?: Callbacks): BaseLanguageModel => {
     switch (idbLLMConfigModel.type) {
         case LLMTypeEnum.ChatAnthropic:
             return getChatAnthropic(idbLLMConfigModel, callbacks);
         default:
-            return getLLM(idbLLMConfigModel, callbacks);
+            return getLLMBase(idbLLMConfigModel, callbacks);
     }
 }
-
-export const getLLM = (idbLLMConfigModel: IdbLLMConfigModel, callbacks?: Callbacks): BaseLanguageModel => {
+export const getLLMBase = (idbLLMConfigModel: IdbLLMConfigModel, callbacks?: Callbacks): BaseLanguageModel => {
     switch (idbLLMConfigModel.type) {
         case LLMTypeEnum.ChatOpenAI:
             return getChatOpenAI(idbLLMConfigModel, callbacks);
