@@ -60,10 +60,8 @@ function checkIfItemMatchesSearchString(item: Item, searchString: string): boole
     // Split searchString into terms by ' AND '
     const terms = searchString.split(' AND ')
         .map(term => term.trim());
-
     for (let term of terms) {
         let notFlag = false;
-
         // Check for 'NOT ' operator
         if (term.startsWith('NOT ')) {
             notFlag = true;
@@ -88,90 +86,9 @@ function checkIfItemMatchesSearchString(item: Item, searchString: string): boole
             return false; // Return false or handle error as needed
         }
     }
-
     // If all terms are found (or not found when 'NOT' is used), return true
     return true;
 }
-
-// type Operator = 'AND' | 'OR' | 'NOT';
-// type Token = Operator | '(' | ')' | string;
-
-// function tokenize(searchString: string): Token[] {
-//     // Split the search string into tokens
-//     return searchString.match(/\b(AND|OR|NOT)\b|\(|\)|"[^"]*"|'[^']*'|\S+/g) || [];
-// }
-
-// function parseFactor(tokens: Token[], index: number, item: Item): [boolean, number] {
-//     if (tokens[index] === 'NOT') {
-//         const result = parseFactor(tokens, index + 1, item);
-//         return [!result[0], result[1]];
-//     } else if (tokens[index] === '(') {
-//         const result = parseExpression(tokens, index + 1, item);
-//         if (tokens[result[1]] !== ')') {
-//             throw new Error('Expected )');
-//         }
-//         return [result[0], result[1] + 1];
-//     } else {
-//         return [searchIndex[item.id].includes(tokens[index].toLowerCase()), index + 1];
-//     }
-// }
-
-// function parseTerm(tokens: Token[], index: number, item: Item): [boolean, number] {
-//     let result = parseFactor(tokens, index, item);
-//     index = result[1];
-//     while (index < tokens.length && tokens[index] === 'AND') {
-//         const right = parseFactor(tokens, index + 1, item);
-//         result = [result[0] && right[0], right[1]];
-//         index = result[1];
-//     }
-//     return result;
-// }
-
-// function parseExpression(tokens: Token[], index: number, item: Item): [boolean, number] {
-//     let result = parseTerm(tokens, index, item);
-//     index = result[1];
-//     while (index < tokens.length && tokens[index] === 'OR') {
-//         const right = parseTerm(tokens, index + 1, item);
-//         result = [result[0] || right[0], right[1]];
-//         index = result[1];
-//     }
-//     return result;
-// }
-
-// function checkIfItemMatchesSearchString(item: Item, searchString: string): boolean {
-//     const tokens = tokenize(searchString);
-//     const result = parseExpression(tokens, 0, item);
-//     if (result[1] !== tokens.length) {
-//         throw new Error('Unexpected token ' + tokens[result[1]]);
-//     }
-//     return result[0];
-// }
-
-// function checkIfItemMatchesSearchString(item: Item, searchString: string): boolean {
-//     // searchString is the original query
-//     // lastSearchStringLowered is the toLowerCase query
-//     const parsedQuery = parseBooleanQuery(searchString);
-//     console.log("parsedQuery", parsedQuery);
-//     return checkBooleanQuery(searchIndex[item.id], parsedQuery);
-// }
-
-// function checkBooleanQuery(searchIndex: string, query: any[]): boolean {
-//     for (let i = 0; i < query.length; i++) {
-//         const subQuery = query[i];
-//         let matches = true;
-//         for (let j = 0; j < subQuery.length; j++) {
-//             const term = subQuery[j];
-//             if (!searchIndex.includes(term.toLowerCase())) {
-//                 matches = false;
-//                 break;
-//             }
-//         }
-//         if (matches) {
-//             return true;
-//         }
-//     }
-//     return false;
-// }
 
 
 function applySearchFilter(items: Item[], searchString: string): boolean {
@@ -190,14 +107,12 @@ function applySearchFilter(items: Item[], searchString: string): boolean {
 }
 
 let lastSearchString = "";
-let lastSearchStringLowered = "";
 const searchTreeView = debounce(() => {
     if (lastSearchString === chatListTreeviewStore.searchString) {
         console.log("search ignored");
         return;
     } else {
         lastSearchString = chatListTreeviewStore.searchString;
-        lastSearchStringLowered = lastSearchString.toLowerCase();
         if (chatListTreeviewStore.searchString !== "") {
             applySearchFilter(chatListTreeviewStore.treeviewItems, chatListTreeviewStore.searchString);
             chatListTreeviewStore.reRenderer();
@@ -286,30 +201,10 @@ export function findItem(items: Item[], id: string): FindItemResult | null {
 }
 
 export const chatListTreeviewStore = new ChatListTreeviewModel(KEYVAL_KEYS.CHATLIST_TREEVIEW_STATE);
-
-
-// Promise.resolve().then(async () => {
-//     await loadState();
-//     enableAutoSave();
-//     chatListTreeviewStore.reRenderer();
-// });
-
-// const loadState = async () => {
-//     try {
-//         const storedValue = await getKeyVal<ChatListTreeviewModel>(KEYVAL_KEYS.CHATLIST_TREEVIEW_STATE);
-//         if (storedValue) {
-//             Object.assign(chatListTreeviewStore, storedValue);
-//             chatListTreeviewStore.reRenderer();
-//             generateSearchIndex();
-//         }
-//     } catch (error) {
-//         console.error(`Failed to load state: ${error}`);
-//     }
-// }
-
-// const enableAutoSave = async () => {
-//     chatListTreeviewStore.subscribe(() => {
-//         searchTreeView();
-//         setKeyVal(KEYVAL_KEYS.CHATLIST_TREEVIEW_STATE, chatListTreeviewStore.serialize());
-//     });
-// }
+Promise.resolve().then(() => {
+    chatListTreeviewStore.reRenderer();
+    generateSearchIndex();
+    chatListTreeviewStore.subscribe(() => {
+        searchTreeView();
+    });
+});
