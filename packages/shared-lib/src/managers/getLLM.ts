@@ -15,12 +15,15 @@ import { anthropicSettingsStore } from "$root/stores/anthropicSettingsStore";
 
 export const testLLM = async (idbLLMConfigModel: IdbLLMConfigModel) => {
     try {
-        const llm = getLLM(idbLLMConfigModel);
+        const llm = getLLMExtension(idbLLMConfigModel);
         const options: any = {
             maxConcurrency: 1,
             maxRetries: 1,
             verbose: true,
         };
+        if (idbLLMConfigModel.type === LLMTypeEnum.ChatAnthropic) {
+            options.timeout = 20e3;
+        }
         const result = await llm.invoke('hello', options);
         return {
             status: true,
@@ -33,7 +36,6 @@ export const testLLM = async (idbLLMConfigModel: IdbLLMConfigModel) => {
         };
     }
 }
-
 const handleOverrides = (configObj: any, requestInit?: RequestInit) => {
     let options = { ...requestInit };
     if (Object.keys(configObj.overrideRequestHeaders).length > 0) {
