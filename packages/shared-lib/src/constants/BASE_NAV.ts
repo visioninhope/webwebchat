@@ -10,6 +10,6 @@ export const BASE_NAV = {
         return `#/chat/${chatId}`;
     },
 
-    LLMS: '#/llms',
+    LLMS: '#/settings/llms',
 
 }

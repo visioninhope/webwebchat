@@ -6,5 +6,6 @@ export class ChatSettingsStore
     extends AutoSaveStoreClass<ChatSettingsStore> // to make it observable like svelte store
 {
     isSendMessageOnEnterEnabled: boolean = true;
+    defaultLLMConfigId: string = "";
 }
 export const chatSettingsStore = new ChatSettingsStore(KEYVAL_KEYS.CHAT_SETTINGS_KEY);
