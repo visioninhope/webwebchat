@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { createEventDispatcher } from "svelte";
-	import BasicJsonEditor from "$root/components/llm/configs/BasicJsonEditor.svelte";
+	import BasicJsonEditor from "$root/components/llm/configs/JsonEditor/BasicJsonEditor.svelte";
 	import OAIConfig from "$root/components/llm/configs/OpenAI/OpenAIConfig.svelte";
 	import { defaultSystemMessage } from "$root/constants/constants";
 	import { default_openai_fields } from "$root/constants/default-llm-configs/default_openai_fields";
