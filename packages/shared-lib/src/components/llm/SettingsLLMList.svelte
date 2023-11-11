@@ -3,7 +3,7 @@
 	import SettingsTabs from "$root/components/settings/SettingsTabs.svelte";
 	import LogoType from "$root/components/logos/LogoType.svelte";
 	import DaisyModal from "$root/components/utils/DaisyModal.svelte";
-	import LlmConfigEdit from "$root/components/llm/LLMConfigEdit.svelte";
+	import LLMConfigEdit from "$root/components/llm/LLMConfigEdit.svelte";
 	import { IdbLLMConfigModel } from "$root/idb-models/IdbLLMConfigModel";
 	import { NEW_IDB_KEY } from "$root/constants/constants";
 	import { chatSettingsStore } from "$root/stores/chatSettingsStore";
@@ -107,5 +107,5 @@
 </button>
 
 <DaisyModal bind:this={modalElement} title="LLM config">
-	<LlmConfigEdit bind:idbLLMConfigModel on:save={saveModel} />
+	<LLMConfigEdit bind:idbLLMConfigModel on:save={saveModel} />
 </DaisyModal>

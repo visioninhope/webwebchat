@@ -3,7 +3,7 @@
 	import DaisyModal from "$root/components/utils/DaisyModal.svelte";
 	import { IdbLLMConfigModel } from "$root/idb-models/IdbLLMConfigModel";
 	import { NEW_IDB_KEY } from "$root/constants/constants";
-	import LlmConfigEdit from "$root/components/llm/LLMConfigEdit.svelte";
+	import LLMConfigEdit from "$root/components/llm/LLMConfigEdit.svelte";
 	import LogoType from "$root/components/logos/LogoType.svelte";
 	import { llmConfigListStore } from "$root/stores/llmConfigListStore";
 	import { createEventDispatcher } from "svelte";
@@ -11,14 +11,14 @@
 
 	const dispatch = createEventDispatcher();
 	export let chatManager: ChatManager;
-	let configEditModal: DaisyModal;
+	let modalElement: DaisyModal;
 	let idbLLMConfigModel: IdbLLMConfigModel;
 
 	async function showEditConfigModal(llmConfigId: string) {
 		if (!idbLLMConfigModel || idbLLMConfigModel.llmConfigId !== llmConfigId) {
 			idbLLMConfigModel = await IdbLLMConfigModel.withLoad(llmConfigId);
 		}
-		configEditModal.showModal();
+		modalElement.showModal();
 	}
 
 	async function useLLM(llmConfigId: string) {
@@ -33,10 +33,10 @@
 			chatManager.idbChatOptionsModel.llmConfigId =
 				chatSettingsStore.defaultLLMConfigId;
 			chatManager.idbChatOptionsModel.save();
-			configEditModal.close();
+			modalElement.close();
 		} else {
 			await idbLLMConfigModel.save();
-			configEditModal.close();
+			modalElement.close();
 		}
 		dispatch("use");
 	}
@@ -97,6 +97,6 @@
 	New
 </button>
 
-<DaisyModal bind:this={configEditModal} title="LLM config">
-	<LlmConfigEdit bind:idbLLMConfigModel on:save={saveModel} />
+<DaisyModal bind:this={modalElement} title="LLM config">
+	<LLMConfigEdit bind:idbLLMConfigModel on:save={saveModel} />
 </DaisyModal>

@@ -32,6 +32,8 @@ export class IdbLLMConfigModel {
 
 
     getModelName() {
+        // model is from Ollama
+        // modelName is from OpenAI, Azure and Anthropic
         return this.config.modelName || this.config.model || "";
     }
 
