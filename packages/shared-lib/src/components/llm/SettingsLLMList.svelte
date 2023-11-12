@@ -7,8 +7,14 @@
 	import { IdbLLMConfigModel } from "$root/idb-models/IdbLLMConfigModel";
 	import { NEW_IDB_KEY } from "$root/constants/constants";
 	import { chatSettingsStore } from "$root/stores/chatSettingsStore";
+	import type { LLMTypeEnum } from "$root/types/LLMTypeEnum";
+	import type { SvelteComponent } from "svelte";
 	let modalElement: DaisyModal;
 	let idbLLMConfigModel: IdbLLMConfigModel;
+
+	export let getConfigContainerComponent: (
+		type: LLMTypeEnum
+	) => Promise<typeof SvelteComponent | undefined>;
 
 	async function showModal(llmConfigId: string) {
 		if (!idbLLMConfigModel || idbLLMConfigModel.llmConfigId !== llmConfigId) {
@@ -107,5 +113,11 @@
 </button>
 
 <DaisyModal bind:this={modalElement} title="LLM config">
-	<LLMConfigEdit bind:idbLLMConfigModel on:save={saveModel} />
+	{#if idbLLMConfigModel}
+		<LLMConfigEdit
+			bind:idbLLMConfigModel
+			on:save={saveModel}
+			{getConfigContainerComponent}
+		/>
+	{/if}
 </DaisyModal>

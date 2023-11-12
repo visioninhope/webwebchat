@@ -264,33 +264,35 @@
 
 			<div class="divider" />
 
-			<div>
-				<div class="form-control mb-10">
-					<div class="flex">
-						<span class="label">
-							<span class="label-text">Base URL</span>
-							<button
-								class="btn btn-sm btn-outline"
-								type="button"
-								on:click={() => {
-									idbLLMConfigModel.config.configuration.baseURL =
-										"https://api.openai.com/v1";
-								}}
-							>
-								(Reset to default)
-							</button>
-						</span>
+			{#if idbLLMConfigModel && idbLLMConfigModel.config && idbLLMConfigModel.config.configuration && idbLLMConfigModel.config.configuration.baseURL}
+				<div>
+					<div class="form-control mb-10">
+						<div class="flex">
+							<span class="label">
+								<span class="label-text">Base URL</span>
+								<button
+									class="btn btn-sm btn-outline"
+									type="button"
+									on:click={() => {
+										idbLLMConfigModel.config.configuration.baseURL =
+											"https://api.openai.com/v1";
+									}}
+								>
+									(Reset to default)
+								</button>
+							</span>
+						</div>
+						<div class="text-xs my-1">
+							* Must be compatible with /v1/chat/completions
+						</div>
+						<input
+							bind:value={idbLLMConfigModel.config.configuration.baseURL}
+							type="text"
+							class="input input-bordered"
+						/>
 					</div>
-					<div class="text-xs my-1">
-						* Must be compatible with /v1/chat/completions
-					</div>
-					<input
-						bind:value={idbLLMConfigModel.config.configuration.baseURL}
-						type="text"
-						class="input input-bordered"
-					/>
 				</div>
-			</div>
+			{/if}
 		</div>
 	</details>
 

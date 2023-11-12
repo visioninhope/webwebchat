@@ -1,24 +1,30 @@
 <script lang="ts">
 	import SettingsLLMList from "$root/components/llm/SettingsLLMList.svelte";
-	// import Webstore from "$root/components/utils/Webstore.svelte";
-	// import Tab from "$root/components/utils/tabs/Tab.svelte";
-	// import Tabs from "$root/components/utils/tabs/Tabs.svelte";
+	import { LLMTypeEnum } from "$root/types/LLMTypeEnum";
+	import type { SvelteComponent } from "svelte";
+
+	const getConfigContainerComponent = async (type: LLMTypeEnum) => {
+		switch (type) {
+			case LLMTypeEnum.ChatOpenAI:
+				return (
+					await import(
+						"$root/components/llm//configs/OpenAI/OpenAIConfig.svelte"
+					)
+				).default as typeof SvelteComponent;
+			case LLMTypeEnum.ChatOpenAIAzure:
+				return (
+					await import("$root/components/llm//configs/Azure/AzureConfig.svelte")
+				).default as typeof SvelteComponent;
+			case LLMTypeEnum.ChatOllama:
+				return (
+					await import(
+						"$root/components/llm//configs/Ollama/OllamaConfig.svelte"
+					)
+				).default as typeof SvelteComponent;
+			default:
+				return;
+		}
+	};
 </script>
 
-<!-- 
-<Tabs
-	let:tabs
-	let:active
-	defaultTab="Tab 1"
-	btnClass="tab tab-lg tab-lifted"
-	tabsContainerClass="tabs mb-10 tabs-boxed"
->
-	<Tab {tabs} {active} title="Tab 1">
-		Content for Tab 1
-		<Webstore />
-	</Tab>
-	<Tab {tabs} {active} title="Tab 2">tab2</Tab>
-	<Tab {tabs} {active} title="Tab 3">Content for Tab 3</Tab>
-</Tabs> -->
-
-<SettingsLLMList />
+<SettingsLLMList {getConfigContainerComponent} />

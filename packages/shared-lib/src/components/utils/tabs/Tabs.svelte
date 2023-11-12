@@ -27,6 +27,7 @@
     let:tabs
     let:active
     defaultTab="Tab 1"
+    activeBtnClass="tab-active"
     btnClass="tab tab-lg tab-lifted"
     tabsContainerClass="tabs mb-10 tabs-boxed"
 >

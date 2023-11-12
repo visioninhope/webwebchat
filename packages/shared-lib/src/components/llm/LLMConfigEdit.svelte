@@ -1,185 +1,39 @@
 <script lang="ts">
-	import { createEventDispatcher } from "svelte";
-	import BasicJsonEditor from "$root/components/llm/BasicJsonEditor.svelte";
-	import OAIConfig from "$root/components/llm/configs/OpenAI/OpenAIConfig.svelte";
 	import { defaultSystemMessage } from "$root/constants/constants";
-	import AzureConfig from "$root/components/llm/configs/Azure/AzureConfig.svelte";
-	import OllamaConfig from "$root/components/llm/configs/Ollama/OllamaConfig.svelte";
-	import { testLLM } from "$root/managers/getLLM";
 	import { IdbLLMConfigModel } from "$root/idb-models/IdbLLMConfigModel";
-	import { LLMTypeEnum } from "$root/types/LLMTypeEnum";
 	import ProviderButtons from "./ProviderButtons.svelte";
 	import { getDefaultConfig } from "$root/constants/default-llm-configs/getDefaultConfig";
-	const dispatch = createEventDispatcher();
-
+	import ConfigContainer from "./configs/ConfigContainer.svelte";
+	import { SvelteComponent, onMount } from "svelte";
+	import type { LLMTypeEnum } from "$root/types/LLMTypeEnum";
+	import Webstore from "../utils/Webstore.svelte";
 	export let idbLLMConfigModel: IdbLLMConfigModel;
-
-	let activeTab = "FormEditor";
-	let basicJsonEditor: BasicJsonEditor;
-	let isTesting = false;
-	let testResult:
-		| {
-				status: boolean;
-				error: unknown;
-		  }
-		| undefined;
-	let makeDefaultModel = true;
-
-	async function onSave() {
-		dispatch("save", {
-			makeDefaultModel,
-		});
-	}
-	function onChatProviderChange() {
-		idbLLMConfigModel.config = getDefaultConfig(idbLLMConfigModel.type);
-		idbLLMConfigModel.systemMessage = defaultSystemMessage;
-		if (basicJsonEditor) {
-			basicJsonEditor.reloadJSON();
+	export let getConfigContainerComponent: (
+		type: LLMTypeEnum
+	) => Promise<typeof SvelteComponent | undefined>;
+	let configComponent: typeof SvelteComponent | undefined;
+	async function onChatProviderChange() {
+		if (idbLLMConfigModel) {
+			idbLLMConfigModel.config = getDefaultConfig(idbLLMConfigModel.type);
+			idbLLMConfigModel.systemMessage = defaultSystemMessage;
+			configComponent = await getConfigContainerComponent(
+				idbLLMConfigModel.type
+			);
 		}
 	}
 
-	function updateActiveTab(tab: string) {
-		activeTab = tab;
-		if (basicJsonEditor) {
-			basicJsonEditor.reloadJSON();
-		}
-	}
-
-	async function testBtnClick() {
-		testResult = undefined;
-		isTesting = true;
-		testResult = await testLLM(idbLLMConfigModel);
-		isTesting = false;
-	}
+	onMount(() => {
+		onChatProviderChange();
+	});
 </script>
 
 <div class="p-2 max-w-3xl m-auto">
 	{#if idbLLMConfigModel}
 		<ProviderButtons bind:idbLLMConfigModel {onChatProviderChange} />
-		<!-- <div class="divider" /> -->
-
-		<div class="tabs mb-10">
-			<button
-				class="tab tab-bordered {activeTab === 'FormEditor'
-					? 'tab-active'
-					: ''}"
-				on:click={() => updateActiveTab("FormEditor")}
-			>
-				Config
-			</button>
-			<button
-				class="tab tab-bordered {activeTab === 'BasicJsonEditor'
-					? 'tab-active'
-					: ''}"
-				on:click={() => updateActiveTab("BasicJsonEditor")}
-			>
-				JSON config
-			</button>
-		</div>
-
-		{#if activeTab === "BasicJsonEditor"}
-			<BasicJsonEditor
-				bind:this={basicJsonEditor}
-				bind:config={idbLLMConfigModel.config}
-			/>
-			{#if idbLLMConfigModel.type === LLMTypeEnum.ChatOpenAI}
-				<a
-					href="https://js.langchain.com/docs/api/chat_models_openai/classes/ChatOpenAI#constructors"
-					target="_blank"
-				>
-					ChatOpenAI
-				</a>
-			{:else if idbLLMConfigModel.type === LLMTypeEnum.ChatOllama}
-				<a
-					href="https://js.langchain.com/docs/api/chat_models_ollama/classes/ChatOllama#constructors"
-					target="_blank"
-				>
-					ChatOllama
-				</a>
-			{:else if idbLLMConfigModel.type === LLMTypeEnum.ChatOpenAIAzure}
-				<a
-					href="https://js.langchain.com/docs/api/chat_models_openai/classes/ChatOpenAI#constructors"
-					target="_blank"
-				>
-					ChatOpenAI
-				</a>
-			{/if}
-		{:else if activeTab === "FormEditor"}
-			{#if idbLLMConfigModel.type === LLMTypeEnum.ChatOpenAI}
-				<OAIConfig bind:idbLLMConfigModel />
-			{:else if idbLLMConfigModel.type === LLMTypeEnum.ChatOllama}
-				<OllamaConfig bind:idbLLMConfigModel />
-			{:else if idbLLMConfigModel.type === LLMTypeEnum.ChatAnthropic}
-				Anthropic API does not allow requests from other websites.
-				<br />
-				Because of this reason, it is supported with extension only.
-				<br />
-				(Browser limitation: 'CORS')
-			{:else if idbLLMConfigModel.type === LLMTypeEnum.ChatOpenAIAzure}
-				<AzureConfig bind:idbLLMConfigModel />
-			{/if}
-		{/if}
-
-		{#if idbLLMConfigModel.type === LLMTypeEnum.ChatAnthropic}
-			<!-- hide -->
+		{#if configComponent}
+			<ConfigContainer on:save bind:idbLLMConfigModel bind:configComponent />
 		{:else}
-			<div class="divider mt-20" />
-
-			<div
-				class="form-control mb-10 tooltip"
-				data-tip="to make it easy to remember"
-			>
-				<span class="label">
-					<span class="label-text">Name (optional)</span>
-				</span>
-				<input
-					bind:value={idbLLMConfigModel.name}
-					type="text"
-					class="input input-bordered"
-				/>
-			</div>
-
-			<div class="divider" />
-			<label class="label cursor-pointer max-w-sm">
-				<input type="checkbox" class="toggle" bind:checked={makeDefaultModel} />
-				<span class="label-text">Remember settings for all future chats</span>
-			</label>
-			<div class="divider" />
-			<div class="grid grid-cols-2 gap-4 mb-5">
-				<div>
-					<button
-						class="btn btn-outline"
-						on:click={testBtnClick}
-						disabled={isTesting}
-					>
-						{#if isTesting}
-							<span class="loading loading-spinner" />
-						{/if}
-						Test
-					</button>
-					{#if testResult}
-						{#if testResult.status}
-							<div class="alert alert-success inline">
-								<span>Success</span>
-							</div>
-						{:else}
-							<div class="alert alert-error inline">
-								<span>Error: {testResult.error}</span>
-							</div>
-						{/if}
-					{/if}
-				</div>
-			</div>
-			<!-- <div class="divider" /> -->
-			<!-- <div class="sticky bottom-0 h-10 z-40"></div> -->
-			<div class="sticky bottom-0 h-10 z-40">
-				<button
-					class="btn btn-primary btn-block font-extrabold"
-					on:click={onSave}
-				>
-					Save
-				</button>
-			</div>
+			<Webstore />
 		{/if}
 	{/if}
 </div>

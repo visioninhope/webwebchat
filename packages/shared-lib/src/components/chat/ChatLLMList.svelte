@@ -98,5 +98,5 @@
 </button>
 
 <DaisyModal bind:this={modalElement} title="LLM config">
-	<LLMConfigEdit bind:idbLLMConfigModel on:save={saveModel} />
+	<!-- <LLMConfigEdit bind:idbLLMConfigModel on:save={saveModel} /> -->
 </DaisyModal>

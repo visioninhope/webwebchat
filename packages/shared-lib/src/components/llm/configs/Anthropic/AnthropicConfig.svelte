@@ -6,6 +6,8 @@
 	export let idbLLMConfigModel: IdbLLMConfigModel;
 </script>
 
+<h1>AnthropicSettingsAnthropicSettings</h1>
+
 <div class="space-y-20">
 	<AnthropicSettings />
 
