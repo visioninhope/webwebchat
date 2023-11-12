@@ -1,17 +1,15 @@
 <script lang="ts">
 	import { createEventDispatcher } from "svelte";
-	import BasicJsonEditor from "$root/components/llm/configs/JsonEditor/BasicJsonEditor.svelte";
+	import BasicJsonEditor from "$root/components/llm/BasicJsonEditor.svelte";
 	import OAIConfig from "$root/components/llm/configs/OpenAI/OpenAIConfig.svelte";
 	import { defaultSystemMessage } from "$root/constants/constants";
-	import { default_openai_fields } from "$root/constants/default-llm-configs/default_openai_fields";
-	import { default_azure_fields } from "$root/constants/default-llm-configs/default_azure_fields";
-	import { default_ollama_fields } from "$root/constants/default-llm-configs/default_ollama_fields";
 	import AzureConfig from "$root/components/llm/configs/Azure/AzureConfig.svelte";
 	import OllamaConfig from "$root/components/llm/configs/Ollama/OllamaConfig.svelte";
 	import { testLLM } from "$root/managers/getLLM";
-	import LogoType from "$root/components/logos/LogoType.svelte";
 	import { IdbLLMConfigModel } from "$root/idb-models/IdbLLMConfigModel";
 	import { LLMTypeEnum } from "$root/types/LLMTypeEnum";
+	import ProviderButtons from "./ProviderButtons.svelte";
+	import { getDefaultConfig } from "$root/constants/default-llm-configs/getDefaultConfig";
 	const dispatch = createEventDispatcher();
 
 	export let idbLLMConfigModel: IdbLLMConfigModel;
@@ -33,17 +31,7 @@
 		});
 	}
 	function onChatProviderChange() {
-		if (idbLLMConfigModel.type === LLMTypeEnum.ChatOpenAI) {
-			idbLLMConfigModel.config = default_openai_fields;
-		} else if (idbLLMConfigModel.type === LLMTypeEnum.ChatOpenAIAzure) {
-			idbLLMConfigModel.config = default_azure_fields;
-		} else if (idbLLMConfigModel.type === LLMTypeEnum.ChatOllama) {
-			idbLLMConfigModel.config = default_ollama_fields;
-		} else if (idbLLMConfigModel.type === LLMTypeEnum.ChatAnthropic) {
-			// do nothing
-		} else {
-			throw new Error(`Unknown chat provider type: ${idbLLMConfigModel.type}`);
-		}
+		idbLLMConfigModel.config = getDefaultConfig(idbLLMConfigModel.type);
 		idbLLMConfigModel.systemMessage = defaultSystemMessage;
 		if (basicJsonEditor) {
 			basicJsonEditor.reloadJSON();
@@ -67,23 +55,7 @@
 
 <div class="p-2 max-w-3xl m-auto">
 	{#if idbLLMConfigModel}
-		<div class="divider">Select An LLM Provider</div>
-		<div class="join join-vertical lg:join-horizontal mb-5">
-			{#each Object.entries(LLMTypeEnum) as [key, value]}
-				<button
-					class="btn join-item {value === idbLLMConfigModel.type
-						? 'btn-primary'
-						: 'btn-outline'}"
-					on:click={() => {
-						idbLLMConfigModel.type = value;
-						onChatProviderChange();
-					}}
-				>
-					<LogoType type={key} />
-					{key.replace("Chat", "")}
-				</button>
-			{/each}
-		</div>
+		<ProviderButtons bind:idbLLMConfigModel {onChatProviderChange} />
 		<!-- <div class="divider" /> -->
 
 		<div class="tabs mb-10">
