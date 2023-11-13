@@ -32,7 +32,9 @@
 	{#if idbLLMConfigModel}
 		<ProviderButtons bind:idbLLMConfigModel {onChatProviderChange} />
 		{#if configComponent}
-			<ConfigContainer on:save bind:idbLLMConfigModel bind:configComponent />
+			{#key idbLLMConfigModel.type}
+				<ConfigContainer on:save bind:idbLLMConfigModel bind:configComponent />
+			{/key}
 		{:else}
 			<Webstore />
 		{/if}

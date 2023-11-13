@@ -21,8 +21,10 @@
 		if (!idbLLMConfigModel || idbLLMConfigModel.llmConfigId !== llmConfigId) {
 			idbLLMConfigModel = await IdbLLMConfigModel.withLoad(llmConfigId);
 		}
-		llmConfigEditComponent.onChatProviderChange();
 		modalElement.showModal();
+		if (llmConfigEditComponent) {
+			llmConfigEditComponent.onChatProviderChange();
+		}
 	}
 	async function remove(llmConfigId: string) {
 		if (confirm("Are you sure you want to delete this chat model?")) {
