@@ -10,8 +10,10 @@
 </script>
 
 <dialog bind:this={modalElement} class="modal">
-	<div class="modal-box max-w-fit text-base-content p-0 border">
-		<!-- w-11/12  -->
+	<div
+		class="modal-box w-11/12 max-w-full min-h-full text-base-content p-0 border"
+	>
+		<!-- max-w-fit  -->
 		<div class="sticky top-0 bg-base-200 h-10 z-40">
 			<div class="flex">
 				<div class="flex-grow">

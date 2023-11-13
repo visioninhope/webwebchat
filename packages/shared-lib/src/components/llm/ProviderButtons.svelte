@@ -7,7 +7,7 @@
 </script>
 
 <div class="divider">Select An LLM Provider</div>
-<div class="join join-vertical lg:join-horizontal mb-5">
+<div class="join join-vertical sm:join-horizontal mb-5">
 	{#each Object.entries(LLMTypeEnum) as [key, value]}
 		<button
 			class="btn join-item {value === idbLLMConfigModel.type

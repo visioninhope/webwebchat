@@ -10,15 +10,16 @@
 	export let idbLLMConfigModel: IdbLLMConfigModel;
 	export let getConfigContainerComponent: (
 		type: LLMTypeEnum
-	) => Promise<typeof SvelteComponent | undefined>;
+	) => typeof SvelteComponent | undefined;
 	let configComponent: typeof SvelteComponent | undefined;
-	async function onChatProviderChange() {
+
+	export function onChatProviderChange() {
 		if (idbLLMConfigModel) {
+			configComponent = undefined;
+			idbLLMConfigModel = idbLLMConfigModel;
 			idbLLMConfigModel.config = getDefaultConfig(idbLLMConfigModel.type);
 			idbLLMConfigModel.systemMessage = defaultSystemMessage;
-			configComponent = await getConfigContainerComponent(
-				idbLLMConfigModel.type
-			);
+			configComponent = getConfigContainerComponent(idbLLMConfigModel.type);
 		}
 	}
 
@@ -27,7 +28,7 @@
 	});
 </script>
 
-<div class="p-2 max-w-3xl m-auto">
+<div class="p-2 max-w-4xl m-auto">
 	{#if idbLLMConfigModel}
 		<ProviderButtons bind:idbLLMConfigModel {onChatProviderChange} />
 		{#if configComponent}

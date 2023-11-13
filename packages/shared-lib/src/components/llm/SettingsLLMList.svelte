@@ -14,12 +14,14 @@
 
 	export let getConfigContainerComponent: (
 		type: LLMTypeEnum
-	) => Promise<typeof SvelteComponent | undefined>;
+	) => typeof SvelteComponent | undefined;
 
+	let llmConfigEditComponent: LLMConfigEdit;
 	async function showModal(llmConfigId: string) {
 		if (!idbLLMConfigModel || idbLLMConfigModel.llmConfigId !== llmConfigId) {
 			idbLLMConfigModel = await IdbLLMConfigModel.withLoad(llmConfigId);
 		}
+		llmConfigEditComponent.onChatProviderChange();
 		modalElement.showModal();
 	}
 	async function remove(llmConfigId: string) {
@@ -115,6 +117,7 @@
 <DaisyModal bind:this={modalElement} title="LLM config">
 	{#if idbLLMConfigModel}
 		<LLMConfigEdit
+			bind:this={llmConfigEditComponent}
 			bind:idbLLMConfigModel
 			on:save={saveModel}
 			{getConfigContainerComponent}

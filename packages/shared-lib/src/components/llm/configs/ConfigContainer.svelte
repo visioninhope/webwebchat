@@ -35,7 +35,6 @@
 
 <Tabs let:tabs let:active defaultTab="Config">
 	<Tab {tabs} {active} title="Config">
-		<!-- <OpenAiConfig bind:idbLLMConfigModel /> -->
 		<svelte:component this={configComponent} bind:idbLLMConfigModel />
 	</Tab>
 	<Tab {tabs} {active} title="Advanced">
